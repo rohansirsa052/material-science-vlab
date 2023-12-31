@@ -1,6 +1,6 @@
 const charts = {};
 const totalSteps= 10;
-const DATA_UPDATE_ANIMATION_DELAY = 600;
+const DATA_UPDATE_ANIMATION_DELAY = 400;
 
 const temperature 
 //in degree C
@@ -116,8 +116,8 @@ function handleStep2() {
         },
       ],
     },
-    "temperature (s)",
-    "Penetration Depth (nm)"
+    "Temperature (C)",
+    "Impact Energy (J)",
   );
 
   document.getElementById("btnNext").disabled = true;
@@ -156,7 +156,6 @@ function handleStep2() {
             <tr>
               <td>${temperature[currPos]}</td>
               <td>${ Impact_Energy[currPos]}</td>
-           
             </tr>
           `;
       currPos++;
@@ -172,7 +171,7 @@ function handleStep2() {
               data:  Impact_Energy.slice(0, progress1),
               borderColor: "#3e95cd",
               fill: false,
-              label: "Temperature",
+              // label: "Temperature",
             },
             // {
             //   yAxisID: "B",
@@ -183,8 +182,8 @@ function handleStep2() {
             // },
           ],
         },
-        "Impact Energy  (J)",
-        "Temperature (C)"
+        "Temperature (C)",
+        "Impact Energy (J)",
       );
     }, DATA_UPDATE_ANIMATION_DELAY);
   });
@@ -354,7 +353,7 @@ function plotGraph(graphCtx, data, labelX, labelY) {
         responsive: true,
         animation: false,
         scaleOverride: true,
-        // legend: { display: false },
+        legend: { display: false },
         scales: {
           xAxes: [
             {
