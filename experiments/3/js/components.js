@@ -930,7 +930,7 @@
     let xOffset = 30;
     let yOffset = 100;
     let yMovement = 0; /* 0 to 1 */
-    let dragMode = 1; /* 0 = no drag, 1 = drag machine, */
+    let dragMode = 0; /* 0 = no drag, 1 = drag machine, */
     let isFixed = 0; /* 0=draggable; 1=not draggable */
     let sampleLoaded = false;
     let menuPinText = ["Pin", "Unpin"];

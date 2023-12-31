@@ -134,20 +134,27 @@
                   <ul>
                     <li>Click below buttons to start the machine.</li>
                   </ul>
+                  <div>
+                    <p>Test 1: Test till fracture</p>
+                    <p>Test 2: Unloading and immediately retesting</p>
+                    <p>Test 3: Unloading and retesting after aging</p>
+                  </div>
+
                   <div class="mt-1">
                     <button id="startTest">Start Test</button>
                     <button id="showGraphBtn" onclick="showGraph()" disabled>Plot</button>
                   </div>
+                  
                   <canvas id="graph1"></canvas>
-                  <canvas id="graph2"></canvas>
-                  <canvas id="graph3"></canvas>
+
                   <!-- Table 1 -->
                   <div class="mt-1 dataTable">
+                    <p>Test 1</p>
                     <table>
                       <thead>
                         <tr>
-                          <td>Engineering Strain1</td>
-                          <td>Engineering Stress1</td>
+                          <td>Strain</td>
+                          <td>Stress</td>
                         </tr>
                       </thead>
                       <tbody id="testData1"></tbody>
@@ -156,11 +163,12 @@
 
                   <!-- Table 2 -->
                   <div class="mt-1 dataTable">
+                    <p>Test 2</p>
                     <table>
                       <thead>
                         <tr>
-                          <td>Engineering Strain2</td>
-                          <td>Engineering Stress2</td>
+                          <td>Strain</td>
+                          <td>Stress</td>
                         </tr>
                       </thead>
                       <tbody id="testData2"></tbody>
@@ -169,11 +177,12 @@
 
                   <!-- Table 3 -->
                   <div class="mt-1 dataTable">
+                    <p>Test 3</p>
                     <table>
                       <thead>
                         <tr>
-                          <td>Engineering Strain3</td>
-                          <td>Engineering Stress3</td>
+                          <td>Strain</td>
+                          <td>Stress</td>
                         </tr>
                       </thead>
                       <tbody id="testData3"></tbody>
@@ -187,48 +196,13 @@
                 <div class="content">Click next button to continue.</div>
               </div>
 
-              <!--<div id="step6" class="box disabled">
-                <div class="label">Step 6: Measure final length.</div>
-                <div class="content">
-                  <ul>
-                    <li>Right click on vernier caliper and click on "Pin"</li>
-                    <li>Place the sample on the venier caliper and take the length.</li>
-                  </ul>
-
-                  <div class="mt-1">Change in length is negligible.</div>
-                </div>
-              </div>-->
-
-              <!--<div id="step7" class="box disabled">
-                <div class="label">Step 7: Measure final diameter</div>
-                <div class="content">
-                  <ul>
-                    <li>Right click on venier caliper and click on unload sample.</li>
-                    <li>Now, Right click on sample and click on rotate.</li>
-                    <li>Place the sample on the venier caliper and take the diameter.</li>
-                  </ul>
-
-                  <div class="mt-1">Change in diameter is negligible.</div>
-                </div>
-              </div>
-
-              <div id="step8" class="box disabled">
-                <div class="label">Step 8: Results</div>
-                <div class="content"></div>
-              </div>
-            </div>-->
               <div id="step5" class="box disabled">
                 <div class="label">Step 5: Results</div>
                 <div class="content">
                   <ul>
                     <li>Engineering Stress vs Engineering Strain.</li>
                   </ul>
-                  <img src="images/result/result_exp_3.png" alt="Step 5 Image " width="300" />
-                  <div class="canvas-container">
-                    <canvas id="graph1"></canvas>
-                    <canvas id="graph2"></canvas>
-                    <canvas id="graph3"></canvas>
-                  </div>
+                  <img src="images/result/result_exp_3.png" alt="Step 5 Image " width="100%" />
                 </div>
               </div>
 
