@@ -174,8 +174,8 @@ function handleStep1() {
 
 function handleStep2() {
   let pane = document.getElementById("step2");
-  if (furnace) furnace.init();
-  if (sample1) sample1.init();
+  // if (furnace) furnace.init();
+  // if (sample1) sample1.init();
   if (!furnace || !furnace.isActive()) {
     alert("Please take Furnace from menu first!");
     return;
@@ -198,10 +198,10 @@ function handleStep2() {
 }
 
 //plot blank graph
-/*plotGraph(
+plotGraph(
     document.getElementById("outputGraphA").getContext("2d"),
     {
-      labels: time1,
+      labels: time,
       datasets: [
         {
           data: [],
@@ -210,15 +210,14 @@ function handleStep2() {
         },
       ],
     },
-    "Time in hrs",
-    "Strain"
-  );*/
+    "Time in hrs", "Hardness (HV)"
+  );
 
 function handleStep3() {
   let pane = document.getElementById("step3");
   //if (utm) utm.destory();
-  if (vickers) vickers.init();
-  if (sample1) sample1.init();
+  // if (vickers) vickers.init();
+  // if (sample1) sample1.init();
   if (!vickers || !vickers.isActive()) {
     alert("Please take Vickers Tester from menu first!");
     return;
@@ -316,13 +315,8 @@ function handleStep4() {
         return;
       }
 
-      const tableData1 = readingData1; // Change to the appropriate data array for Table 1 (readingData1, readingData2, or readingData3)
-      //const tableData2 = readingData2; // Change to the appropriate data array for Table 2 (readingData1, readingData2, or readingData3)
-      //const tableData3 = readingData3; // Change to the appropriate data array for Table 3 (readingData1, readingData2, or readingData3)
-
-      const tableBody1 = document.getElementById("testData1"); // Change to the appropriate table body ID for Table 1 (testData1, testData2, or testData3)
-      //const tableBody2 = document.getElementById("testData2"); // Change to the appropriate table body ID for Table 2 (testData1, testData2, or testData3)
-      //const tableBody3 = document.getElementById("testData3"); // Change to the appropriate table body ID for Table 3 (testData1, testData2, or testData3)
+      const tableData1 = readingData1; 
+      const tableBody1 = document.getElementById("testData1"); 
 
       tableBody1.innerHTML += `
         <tr>
@@ -330,20 +324,6 @@ function handleStep4() {
           <td>${tableData1[currPos][1]}</td>
         </tr>
       `;
-
-      /*tableBody2.innerHTML += `
-        <tr>
-          <td>${tableData2[currPos][0]}</td>
-          <td>${tableData2[currPos][1]}</td>
-        </tr>
-      `;
-  
-      tableBody3.innerHTML += `
-        <tr>
-          <td>${tableData3[currPos][0]}</td>
-          <td>${tableData3[currPos][1]}</td>
-        </tr>
-      `;*/
 
       currPos++;
 
@@ -353,39 +333,14 @@ function handleStep4() {
         labels: time,
         datasets: [
           {
-            data: hardness,
+            data: hardness.slice(0, progress1),
             borderColor: "#3e95cd",
             fill: false,
           },
         ],
       };
-      createChart("graph1", chart1Data, "Time in hrs", "Hardness (HV)");
 
-      /*// Create the second chart
-      const chart2Data = {
-        labels: time2,
-        datasets: [
-          {
-            data: elongation2,
-            borderColor: "#ff5733", // Choose a different color
-            fill: false,
-          },
-        ],
-      };
-      createChart("graph2", chart2Data, "Time in hrs", "Strain");
-  
-      // Create the third chart
-      const chart3Data = {
-        labels: time3,
-        datasets: [
-          {
-            data: elongation3,
-            borderColor: "#00ff00", // Choose a different color
-            fill: false,
-          },
-        ],
-      };
-      createChart("graph3", chart3Data, "Time in hrs", "Strain");*/
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Hardness (HV)");
 
       document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
     }, 600);
@@ -566,10 +521,15 @@ function handleStep7() {
     step7Content.appendChild(imgElement);
   });
 
-  currentStepProgress = 8;
+  currentStepProgress = 7;
+
+  let btnNext = document.getElementById("btnNext");
+  btnNext.disabled = true;
+  btnNext.innerHTML = "Finish";
+
 }
 
-/*function plotGraph(graphCtx, data, labelX, labelY) {
+function plotGraph(graphCtx, data, labelX, labelY) {
   let chartObj = charts[graphCtx.canvas.id];
   if (chartObj) {
     chartObj.config.data.labels = data.labels;
@@ -596,7 +556,7 @@ function handleStep7() {
                 beginAtZero: true,
                 steps: 20,
                 stepValue: 10,
-                max: Math.max(...time1),
+                // max: Math.max(...time1),
               },
               // stacked: true,
             },
@@ -612,7 +572,7 @@ function handleStep7() {
                 beginAtZero: true,
                 steps: 10,
                 stepValue: 5,
-                max: Math.max(...elongation1),
+                // max: Math.max(...elongation1),
               },
             },
           ],
@@ -620,53 +580,8 @@ function handleStep7() {
       },
     });
   }
-}*/
-// Function to create a chart
-function createChart(canvasId, data, labelX, labelY) {
-  const ctx = document.getElementById(canvasId).getContext("2d");
-  return new Chart(ctx, {
-    type: "line",
-    data: data,
-    options: {
-      responsive: true,
-      animation: false,
-      scaleOverride: true,
-      legend: { display: false },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: labelX,
-            },
-            ticks: {
-              beginAtZero: true,
-              steps: 20,
-              stepValue: 10,
-              max: Math.max(...data.labels),
-            },
-          },
-        ],
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: labelY,
-            },
-            ticks: {
-              beginAtZero: true,
-              steps: 10,
-              stepValue: 5,
-              max: Math.max(...data.datasets[0].data),
-            },
-          },
-        ],
-      },
-    },
-  });
 }
+
 
 function showGraph() {
   graphModal = new Modal({
