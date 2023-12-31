@@ -169,10 +169,10 @@ window.refresh();
 
 window.addEventListener("load", function () {
   setTimeout(() => {
-    // if (vc) vc.init();
-    // if (sample1) sample1.init();
+    if (vc) vc.init();
+    if (sample1) sample1.init();
     //utm.init();
-  }, 1500);
+  }, 1000);
 });
 
 function handle() {
@@ -248,7 +248,7 @@ function handleStep3() {
   }
 
   //plot blank graph
-  /*plotGraph(
+  plotGraph(
     document.getElementById("outputGraphA").getContext("2d"),
     {
       labels: time1,
@@ -257,12 +257,13 @@ function handleStep3() {
           data: [],
           borderColor: "#3e95cd",
           fill: false,
+          label: "Test 1",
         },
       ],
     },
     "Time in hrs",
     "Strain"
-  );*/
+  );
 
   document.getElementById("btnNext").disabled = true;
   document.getElementById("startTest").addEventListener("click", function testHandler(e) {
@@ -281,44 +282,31 @@ function handleStep3() {
       utm.start(0.015, 1);
     }, 4000);
 
-    let intr = setInterval(() => {
-      if (currPos >= readingData3.length) {
-        clearInterval(intr);
-        document.getElementById("startTest").disabled = false;
-        document.getElementById("startTest").innerHTML = "Done";
-        document.getElementById("showGraphBtn").disabled = false;
-        utm.stop();
-        document.getElementById("btnNext").disabled = false;
+    let isFirstDone = false;
+    let isSecondDone = false;
+
+    let intr1 = setInterval(() => {
+      if (currPos >= readingData1.length) {
+        clearInterval(intr1);
+        isFirstDone = true;
+        currPos = 0;
+        // document.getElementById("startTest").disabled = false;
+        // document.getElementById("startTest").innerHTML = "Done";
+        // document.getElementById("showGraphBtn").disabled = false;
+        // utm.stop();
+        // document.getElementById("btnNext").disabled = false;
         // document.getElementById("arrowNext").classList.remove("disabled");
         return;
       }
 
       const tableData1 = readingData1; // Change to the appropriate data array for Table 1 (readingData1, readingData2, or readingData3)
-      const tableData2 = readingData2; // Change to the appropriate data array for Table 2 (readingData1, readingData2, or readingData3)
-      const tableData3 = readingData3; // Change to the appropriate data array for Table 3 (readingData1, readingData2, or readingData3)
 
-      const tableBody1 = document.getElementById("testData1"); // Change to the appropriate table body ID for Table 1 (testData1, testData2, or testData3)
-      const tableBody2 = document.getElementById("testData2"); // Change to the appropriate table body ID for Table 2 (testData1, testData2, or testData3)
-      const tableBody3 = document.getElementById("testData3"); // Change to the appropriate table body ID for Table 3 (testData1, testData2, or testData3)
+      const tableBody1 = document.getElementById("testData1");
 
       tableBody1.innerHTML += `
         <tr>
           <td>${tableData1[currPos][0]}</td>
           <td>${tableData1[currPos][1]}</td>
-        </tr>
-      `;
-
-      tableBody2.innerHTML += `
-        <tr>
-          <td>${tableData2[currPos][0]}</td>
-          <td>${tableData2[currPos][1]}</td>
-        </tr>
-      `;
-
-      tableBody3.innerHTML += `
-        <tr>
-          <td>${tableData3[currPos][0]}</td>
-          <td>${tableData3[currPos][1]}</td>
         </tr>
       `;
 
@@ -330,42 +318,128 @@ function handleStep3() {
         labels: time1,
         datasets: [
           {
-            data: elongation1,
+            data: elongation1.slice(0, progress1),
             borderColor: "#3e95cd",
             fill: false,
+            label: "Test 1",
           },
         ],
       };
-      createChart("graph1", chart1Data, "Time in hrs", "Strain");
 
-      // Create the second chart
-      const chart2Data = {
-        labels: time2,
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
+
+      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+    }, 500);
+
+    let intr2 = setInterval(() => {
+      if (!isFirstDone) return;
+
+      if (currPos >= readingData2.length) {
+        clearInterval(intr2);
+        isSecondDone = true;
+        currPos = 0;
+        // document.getElementById("startTest").disabled = false;
+        // document.getElementById("startTest").innerHTML = "Done";
+        // document.getElementById("showGraphBtn").disabled = false;
+        // utm.stop();
+        // document.getElementById("btnNext").disabled = false;
+        // document.getElementById("arrowNext").classList.remove("disabled");
+        return;
+      }
+
+      const tableData2 = readingData2; // Change to the appropriate data array for Table 2 (readingData1, readingData2, or readingData3)
+
+      const tableBody2 = document.getElementById("testData2"); // Change to the appropriate table body ID for Table 2 (testData1
+
+      tableBody2.innerHTML += `
+        <tr>
+          <td>${tableData2[currPos][0]}</td>
+          <td>${tableData2[currPos][1]}</td>
+        </tr>
+      `;
+
+      currPos++;
+
+      let progress1 = (elongation2.length / tableData2.length) * currPos;
+
+      const chart1Data = {
+        labels: time1,
         datasets: [
+          {
+            data: elongation1,
+            borderColor: "#3e95cd",
+            fill: false,
+            label: "Test 1",
+          },
+          {
+            data: elongation2.slice(0, progress1),
+            borderColor: "#ff5733", // Choose a different color
+            fill: false,
+            label: "Test 2",
+          },
+        ],
+      };
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
+
+      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+    }, 500);
+
+    let intr3 = setInterval(() => {
+      if (!isSecondDone) return;
+
+      if (currPos >= readingData3.length) {
+        clearInterval(intr3);
+        document.getElementById("startTest").disabled = false;
+        document.getElementById("startTest").innerHTML = "Done";
+        document.getElementById("showGraphBtn").disabled = false;
+        utm.stop();
+        document.getElementById("btnNext").disabled = false;
+        // document.getElementById("arrowNext").classList.remove("disabled");
+        return;
+      }
+
+      const tableData3 = readingData3; // Change to the appropriate data array for Table 3 (readingData1, readingData2, or readingData3)
+
+      const tableBody3 = document.getElementById("testData3"); // Change to the appropriate table body ID for Table 3 (testData1, testData2, or testData3)
+
+      tableBody3.innerHTML += `
+        <tr>
+          <td>${tableData3[currPos][0]}</td>
+          <td>${tableData3[currPos][1]}</td>
+        </tr>
+      `;
+
+      currPos++;
+
+      let progress1 = (elongation3.length / tableData3.length) * currPos;
+
+      const chart1Data = {
+        labels: time1,
+        datasets: [
+          {
+            data: elongation1,
+            borderColor: "#3e95cd",
+            fill: false,
+            label: "Test 1",
+          },
           {
             data: elongation2,
             borderColor: "#ff5733", // Choose a different color
             fill: false,
+            label: "Test 2",
           },
-        ],
-      };
-      createChart("graph2", chart2Data, "Time in hrs", "Strain");
-
-      // Create the third chart
-      const chart3Data = {
-        labels: time3,
-        datasets: [
           {
-            data: elongation3,
+            data: elongation3.slice(0, progress1),
             borderColor: "#00ff00", // Choose a different color
             fill: false,
+            label: "Test 3",
           },
         ],
       };
-      createChart("graph3", chart3Data, "Time in hrs", "Strain");
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
 
-      document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-    }, 600);
+      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+    }, 500);
   });
 
   pane.classList.add("done");
@@ -457,55 +531,15 @@ function handleStep6() {
   next.classList.add("active");
   next.classList.remove("disabled");
 
-  currentStepProgress = 7;
+  
+  let btn = document.getElementById("btnNext");
+  btn.disabled = true;
+  btn.innerHTML = "Finished";
+
+  currentStepProgress = 6;
 }
 
-/*function handleStep7() {
-  let pane = document.getElementById("step7");
-
-  pane.classList.add("done");
-  pane.classList.remove("active");
-
-  let next = document.getElementById("step8");
-  next.classList.add("active");
-  next.classList.remove("disabled");
-
-  //last
-  document.getElementById("btnNext").disabled = true;
-  // document.getElementById("arrowNext").classList.add("disabled");
-  document.querySelector("#step8 .content").innerHTML = `
-    <table>
-      <tr>
-        <td>Initial Length</td>
-        <td>${sampleLength} mm</td>
-      </tr>
-      <tr>
-        <td>Initial Diameter</td>
-        <td>${sampleDiameter} mm</td>
-      </tr>
-      <tr>
-        <td>Final Length</td>
-        <td>~${sampleLength} mm</td>
-      </tr>
-      <tr>
-        <td>Final Diameter</td>
-        <td>~${sampleDiameter} mm</td>
-      </tr>
-    </table>
-  `;
-}*/
-function handleStep7() {
-  let pane = document.getElementById("step7");
-
-  pane.classList.add("active");
-  pane.classList.remove("disabled");
-
-  let step7Image = document.getElementById("step7Image");
-  step7Image.src = "images/img/results.jpeg";
-  currentStepProgress = 8;
-}
-
-/*function plotGraph(graphCtx, data, labelX, labelY) {
+function plotGraph(graphCtx, data, labelX, labelY) {
   let chartObj = charts[graphCtx.canvas.id];
   if (chartObj) {
     chartObj.config.data.labels = data.labels;
@@ -519,7 +553,7 @@ function handleStep7() {
         responsive: true,
         animation: false,
         scaleOverride: true,
-        legend: { display: false },
+        // legend: { display: false },
         scales: {
           xAxes: [
             {
@@ -532,7 +566,7 @@ function handleStep7() {
                 beginAtZero: true,
                 steps: 20,
                 stepValue: 10,
-                max: Math.max(...time1),
+                // max: Math.max(...time1),
               },
               // stacked: true,
             },
@@ -548,7 +582,7 @@ function handleStep7() {
                 beginAtZero: true,
                 steps: 10,
                 stepValue: 5,
-                max: Math.max(...elongation1),
+                // max: Math.max(...elongation1),
               },
             },
           ],
@@ -556,52 +590,6 @@ function handleStep7() {
       },
     });
   }
-}*/
-// Function to create a chart
-function createChart(canvasId, data, labelX, labelY) {
-  const ctx = document.getElementById(canvasId).getContext("2d");
-  return new Chart(ctx, {
-    type: "line",
-    data: data,
-    options: {
-      responsive: true,
-      animation: false,
-      scaleOverride: true,
-      legend: { display: false },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: labelX,
-            },
-            ticks: {
-              beginAtZero: true,
-              steps: 20,
-              stepValue: 10,
-              max: Math.max(...data.labels),
-            },
-          },
-        ],
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: labelY,
-            },
-            ticks: {
-              beginAtZero: true,
-              steps: 10,
-              stepValue: 5,
-              max: Math.max(...data.datasets[0].data),
-            },
-          },
-        ],
-      },
-    },
-  });
 }
 
 function showGraph() {
