@@ -173,9 +173,9 @@ function Furnace(canvas, ctx) {
   const isInside = ({ x, y }) => {
     boundary = {
       xmin: (xOffset + 20) * scale,
-      xmax: (xOffset + 250) * scale,
+      xmax: (xOffset + 430) * scale,
       ymin: (yOffset + 85) * scale,
-      ymax: (yOffset + 660) * scale,
+      ymax: (yOffset + 600) * scale,
     };
 
     // ctx.fillRect(boundary.xmin, boundary.ymin, boundary.xmax - boundary.xmin, boundary.ymax - boundary.ymin);
@@ -268,7 +268,7 @@ function Furnace(canvas, ctx) {
   };
 
   const onContextMenuHandler = (event) => {
-    if (isActive && contextMenuInstance) {
+    if (contextMenuInstance) {
       contextMenu.closeMenu(contextMenuInstance);
     }
 
@@ -384,7 +384,7 @@ function Sample1(canvas, ctx) {
   let menuRotateText = ["Rotate", "Rotate back"];
   let menuRotateIcon = [ContextMenu.rotateRight, ContextMenu.rotateLeft];
 
-  let scale = 0.4;
+  let scale = 0.6;
 
   let isActive = false;
 
@@ -479,9 +479,9 @@ function Sample1(canvas, ctx) {
     } else {
       boundary = {
         xmin: (xOffset + 10) * scale,
-        xmax: (xOffset + 750) * scale,
+        xmax: (xOffset + 250) * scale,
         ymin: yOffset * scale,
-        ymax: (yOffset + 100) * scale,
+        ymax: (yOffset + 140) * scale,
       };
     }
 
@@ -566,7 +566,7 @@ function Sample1(canvas, ctx) {
   };
 
   const onContextMenuHandler = (event) => {
-    if (isActive && contextMenuInstance) {
+    if (contextMenuInstance) {
       contextMenu.closeMenu(contextMenuInstance);
     }
 
@@ -613,13 +613,13 @@ function Sample1(canvas, ctx) {
           },
         },
       ]);
-      // contextMenuInstance = contextMenu.show(event);
+
       if (rotate) {
         let dx = yOffset * scale;
         let dy = -xOffset * scale;
         contextMenuInstance = contextMenu.show(getCanvasCoords(dx, dy));
       } else {
-        let dx = (xOffset + 750) * scale;
+        let dx = (xOffset + 200) * scale;
         let dy = (yOffset - 10) * scale;
         contextMenuInstance = contextMenu.show(getCanvasCoords(dx, dy));
       }
@@ -827,10 +827,10 @@ function Vickers(canvas, ctx) {
 
   const isInside = ({ x, y }) => {
     boundary = {
-      xmin: (xOffset + 20) * scale,
-      xmax: (xOffset + 800) * scale,
-      ymin: (yOffset + 85) * scale,
-      ymax: (yOffset + 660) * scale,
+      xmin: (xOffset + 650) * scale,
+      xmax: (xOffset + 980) * scale,
+      ymin: (yOffset + 50) * scale,
+      ymax: (yOffset + 600) * scale,
     };
 
     // ctx.fillRect(boundary.xmin, boundary.ymin, boundary.xmax - boundary.xmin, boundary.ymax - boundary.ymin);
@@ -898,7 +898,7 @@ function Vickers(canvas, ctx) {
     if (dragMode == 1) {
       // xOffset += dx;
       // yOffset += dy;
-      xOffset = (x - 100 * scale) / scale;
+      xOffset = (x - 750 * scale) / scale;
       yOffset = (y - 300 * scale) / scale;
 
       ctx.refresh();
@@ -923,7 +923,7 @@ function Vickers(canvas, ctx) {
   };
 
   const onContextMenuHandler = (event) => {
-    if (isActive && contextMenuInstance) {
+    if (contextMenuInstance) {
       contextMenu.closeMenu(contextMenuInstance);
     }
 
@@ -972,8 +972,8 @@ function Vickers(canvas, ctx) {
       }
 
       contextMenu.setMenuItems(menuItems);
-      let dx = (xOffset + 350) * scale;
-      let dy = (yOffset + 120) * scale;
+      let dx = (xOffset + 850) * scale;
+      let dy = (yOffset + 40) * scale;
       contextMenuInstance = contextMenu.show(getCanvasCoords(dx, dy));
     }
     return true;
