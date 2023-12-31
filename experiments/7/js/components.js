@@ -1,6 +1,4 @@
 function MIT(canvas, ctx) {
-
-
   let assetPath = "images/mit/";
   let itemsToLoad = 5;
   let itemsLoaded = 0;
@@ -21,7 +19,7 @@ function MIT(canvas, ctx) {
   let currentSampleState = 0; //0: no crack; 1: necked; 2:cracked
   let currentDialReading = 0;
   let currentLoad = 0;
-  let loadWeight= false;
+  let loadWeight = false;
   let config = {
     yield_point: 0.7,
     breaking_point: 0.9,
@@ -31,9 +29,7 @@ function MIT(canvas, ctx) {
 
   var machineDirection = 1;
 
- 
-
-  let scale = 1.2;
+  let scale = 1.5;
 
   // let startX = 0;
   // let startY = 0;
@@ -101,47 +97,33 @@ function MIT(canvas, ctx) {
 
     x = (xOffset + 80) * scale;
     y = (yOffset + 100) * scale;
+
+    // sample
+    if (sampleLoaded) {
+      let currentSample = sample2Img;
+      let _x = (xOffset + 220) * scale;
+      let _y = (yOffset + 156) * scale;
+      ctx.drawImage(currentSample, _x, _y, (currentSample.width * scale) / 14, (currentSample.height * scale) / 14);
+    }
+
+    ctx.drawImage(imgMIT1, x, y, imgMIT1.width * scale, imgMIT1.height * scale);
+
     // draw sample
     flashArrow = !flashArrow;
     if (!sampleLoaded && flashArrow) {
       let _y = y + 80;
-      let _x = x + 100;
+      let _x = x + 30;
       ctx.fillText("Drag sample here", _x, _y + 15);
       ctx.drawImage(arrow, _x + 100, _y, arrow.width / 2, arrow.height / 2);
     }
-    ctx.drawImage(imgMIT1, x, y, imgMIT1.width * scale, imgMIT1.height * scale);
 
-    // x = (xOffset + 295) * scale;
-    // y = (yOffset + 180) * scale;
-    // ctx.drawImage(imgUTMPiller2, x, y, imgUTMPiller2.width * scale, imgUTMPiller2.height * scale);
+    let currentWeight = sample1Img;
 
-    // x = (xOffset + 68) * scale;
-    // let shift = yMovement * 90 - 125;
-    // y = (yOffset - shift) * scale;
-    // ctx.drawImage(imgUTM2, x, y, imgUTM2.width * scale, imgUTM2.height * scale);
-
-    // (x = xOffset * scale), (y = (yOffset + 500) * scale);
-    // ctx.drawImage(imgUTM1, x, y, imgUTM1.width * scale, imgUTM1.height * scale);
-
-    if (sampleLoaded) {
-      let currentSample = sample2Img;
-      let currentWeight=  sample1Img;
-      // if (CURRENT_SAMPLE == "izod") {
-      //   currentSample = sample1Img;
-      // } else if (CURRENT_SAMPLE == "brass") {
-      //   currentSample = sample2Img;
-      // } else if (CURRENT_SAMPLE == "steel") {
-      //   currentSample = sample3Img;
-      // }
-      let _x = (xOffset + 440) * scale;
-      let _y = (yOffset + 170) * scale;
-      ctx.drawImage(currentSample, _x, _y, (currentSample.width * scale) / 14, (currentSample.height * scale) / 14);
-    
-      if(loadWeight){
-      let _x2 = (xOffset + 395) * scale;
+    // weight
+    if (loadWeight) {
+      let _x2 = (xOffset + 175) * scale;
       let _y2 = (yOffset + 400) * scale;
       ctx.drawImage(currentWeight, _x2, _y2, (currentWeight.width * scale) / 14, (currentWeight.height * scale) / 14);
-      }
     }
 
     ctx.save();
@@ -190,10 +172,10 @@ function MIT(canvas, ctx) {
 
   const isInside = ({ x, y }) => {
     boundary = {
-      xmin: (xOffset + 185) * scale,
-      xmax: (xOffset + 450) * scale,
+      xmin: (xOffset + 100) * scale,
+      xmax: (xOffset + 370) * scale,
       ymin: (yOffset + 140) * scale,
-      ymax: (yOffset + 550) * scale,
+      ymax: (yOffset + 450) * scale,
     };
 
     // ctx.fillRect(boundary.xmin, boundary.ymin, boundary.xmax - boundary.xmin, boundary.ymax - boundary.ymin);
@@ -285,13 +267,13 @@ function MIT(canvas, ctx) {
 
     if (isActive && isInside(getMouseCoords(event))) {
       let menuItems = [
-        {
-          content: `${ContextMenu.deleteIcon}Delete`,
-          divider: "top", // top, bottom, top-bottom
-          events: {
-            click: destroy,
-          },
-        },
+        // {
+        //   content: `${ContextMenu.deleteIcon}Delete`,
+        //   divider: "top", // top, bottom, top-bottom
+        //   events: {
+        //     click: destroy,
+        //   },
+        // },
         {
           content: `${menuPinIcon[isFixed]}${menuPinText[isFixed]}`,
           divider: "top", // top, bottom, top-bottom
@@ -364,7 +346,7 @@ function MIT(canvas, ctx) {
     getDialReading: () => currentDialReading,
     isSampleLoaded: () => sampleLoaded,
     getSampleState: () => currentSampleState,
-    setWeightSampleState: (val) =>loadWeight=val,
+    setWeightSampleState: (val) => (loadWeight = val),
     onMouseDownHandler: onMouseDownHandler,
     onMouseUpHandler: onMouseUpHandler,
     onMouseMoveHandler: onMouseMoveHandler,
@@ -400,11 +382,10 @@ function Sample(canvas, ctx) {
   let menuRotateText = ["Rotate", "Rotate back"];
   let menuRotateIcon = [ContextMenu.rotateRight, ContextMenu.rotateLeft];
 
-  let scale = 0.6;
+  let scale = 0.25;
 
   let isActive = false;
 
-  ;
   sample2Img.src = "images/sample/brass/sample.png";
   sample2Img.onload = itemsLoaded++;
   sample3Img.src = "images/sample/steel/1.png";
@@ -504,9 +485,9 @@ function Sample(canvas, ctx) {
     } else {
       boundary = {
         xmin: (xOffset + 8) * scale,
-        xmax: (xOffset + 180) * scale,
+        xmax: (xOffset + 750) * scale,
         ymin: yOffset * scale,
-        ymax: (yOffset + 80) * scale,
+        ymax: (yOffset + 90) * scale,
       };
     }
 
@@ -515,6 +496,15 @@ function Sample(canvas, ctx) {
     if (x > boundary.xmin && x < boundary.xmax && y > boundary.ymin && y < boundary.ymax) {
       return true;
     }
+  };
+
+  const destroy = () => {
+    if (contextMenuInstance) {
+      contextMenu.closeMenu(contextMenuInstance);
+    }
+
+    isActive = false;
+    ctx.refresh();
   };
 
   const getMouseCoords = (event) => {
@@ -587,13 +577,13 @@ function Sample(canvas, ctx) {
 
     if (isActive && isInside(getMouseCoords(event))) {
       contextMenu.setMenuItems([
-        {
-          content: `${ContextMenu.deleteIcon}Delete`,
-          divider: "top", // top, bottom, top-bottom
-          events: {
-            click: destory,
-          },
-        },
+        // {
+        //   content: `${ContextMenu.deleteIcon}Delete`,
+        //   divider: "top", // top, bottom, top-bottom
+        //   events: {
+        //     click: () => {destory()},
+        //   },
+        // },
         {
           content: `${menuPinIcon[isFixed]}${menuPinText[isFixed]}`,
           divider: "top", // top, bottom, top-bottom
@@ -631,15 +621,6 @@ function Sample(canvas, ctx) {
       contextMenuInstance = contextMenu.show(event);
     }
     return true;
-  };
-
-  const destroy = () => {
-    if (contextMenuInstance) {
-      contextMenu.closeMenu(contextMenuInstance);
-    }
-
-    isActive = false;
-    ctx.refresh();
   };
 
   return {

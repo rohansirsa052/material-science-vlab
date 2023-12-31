@@ -257,7 +257,7 @@ function loadWeightClicked() {
   // You can add additional logic or actions related to loadWeight if needed
   console.log("Load weight clicked. loadWeight is now set to true.");
   mit.setWeightSampleState(loadWeight);
-  
+  alert("Load Weight Selected. Click Next to continue.");
 }
 
 
