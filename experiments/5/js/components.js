@@ -55,6 +55,10 @@ function MIT(canvas, ctx) {
     contextMenu = new ContextMenu();
   };
 
+  const reset = () => {
+    degrees = 0;
+  }
+
   const paint = () => {
     if (!isActive) return;
     ctx.fillStyle = "black";
@@ -371,6 +375,7 @@ function MIT(canvas, ctx) {
     onMouseWheelHandler: onMouseWheelHandler,
     paint: paint,
     destroy: destroy,
+    reset: reset,
   };
 }
 

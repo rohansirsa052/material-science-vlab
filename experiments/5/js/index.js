@@ -72,6 +72,12 @@ var sampleDiameter = 0;
 var sampleFinalLength = 0;
 var sampleFinalDiameter = 0;
 
+var subStepResult = [
+  [-40.3, 8.1],
+  [30.4, 21.3],
+  [79.6, 83.4]
+];
+
 document.getElementById("step1").classList.remove("disabled");
 window.refresh();
 
@@ -122,70 +128,44 @@ function handleStep2() {
 
   document.getElementById("btnNext").disabled = true;
 
-  document.getElementById("startTest").addEventListener("click", (e) => {
-    let tableBody = document.getElementById("testData");
-    // e.currentTarget.disabled = true;
-    // document.getElementById("btnNext").disabled = true;
-    // e.currentTarget.innerHTML = "Running...";
+  let mode = '';
+  let subStepCnt = 0;
+  const btnReset = document.getElementById("btnReset");
+  const startBtn = document.getElementById("startTest");
+  const resultTable = document.getElementById("impactTestResult");
 
-    mit.setConfig({
-      yield_point: 0.3,
-      breaking_point: 0.25,
-      finish_point: 0.2,
-    });
+  btnReset.addEventListener("click", (e) => {
+    mit.reset();
+    btnReset.disabled = true;
+    startBtn.disabled = false;
+    startBtn.innerHTML = "Perform Test " + (subStepCnt + 1);
+  });
 
-    
+  startBtn.addEventListener("click", (e) => {
+    startBtn.disabled = true;
+
     setTimeout(() => {
       mit.start();
     }, 500);
-  
-  
-  
-     
-    let intr = setInterval(() => {
-      if (currPos >= totalSteps) {
-        clearInterval(intr);
-        document.getElementById("startTest").disabled = false;
-        document.getElementById("startTest").innerHTML = "Done";
-        mit.stop();
+
+    setTimeout(() => {      
+      resultTable.innerHTML += `
+        <tr>
+          <td>${subStepResult[subStepCnt][0]}</td>
+          <td>${subStepResult[subStepCnt][1]}</td>
+        </tr>
+      `;
+
+      if(subStepCnt == 2) {
+        startBtn.innerHTML = "Done";
         document.getElementById("btnNext").disabled = false;
         return;
       }
 
-      tableBody.innerHTML += `
-            <tr>
-              <td>${temperature[currPos]}</td>
-              <td>${ Impact_Energy[currPos]}</td>
-            </tr>
-          `;
-      currPos++;
+      subStepCnt++;
+      btnReset.disabled = false;
+    }, 4000);
 
-      let progress1 = ( Impact_Energy.length / totalSteps) * currPos;
-      plotGraph(
-        document.getElementById("outputGraphA").getContext("2d"),
-        {
-          labels: temperature,
-          datasets: [
-            {
-              yAxisID: "A",
-              data:  Impact_Energy.slice(0, progress1),
-              borderColor: "#3e95cd",
-              fill: false,
-              // label: "Temperature",
-            },
-            // {
-            //   yAxisID: "B",
-            //   data: force.slice(0, progress1),
-            //   borderColor: "brown",
-            //   fill: false,
-            //   label: "Force",
-            // },
-          ],
-        },
-        "Temperature (C)",
-        "Impact Energy (J)",
-      );
-    }, DATA_UPDATE_ANIMATION_DELAY);
   });
 
   pane.classList.add("done");
@@ -320,6 +300,50 @@ function handleStep4() {
   let next = document.getElementById("step5");
   next.classList.add("active");
   next.classList.remove("disabled");
+
+  let tableBody = document.getElementById("testData");
+     
+  let intr = setInterval(() => {
+    if (currPos >= totalSteps) {
+      clearInterval(intr);
+      mit.stop();
+      return;
+    }
+
+    tableBody.innerHTML += `
+          <tr>
+            <td>${temperature[currPos]}</td>
+            <td>${ Impact_Energy[currPos]}</td>
+          </tr>
+        `;
+    currPos++;
+
+    let progress1 = ( Impact_Energy.length / totalSteps) * currPos;
+    plotGraph(
+      document.getElementById("outputGraphA").getContext("2d"),
+      {
+        labels: temperature,
+        datasets: [
+          {
+            yAxisID: "A",
+            data:  Impact_Energy.slice(0, progress1),
+            borderColor: "#3e95cd",
+            fill: false,
+            // label: "Temperature",
+          },
+          // {
+          //   yAxisID: "B",
+          //   data: force.slice(0, progress1),
+          //   borderColor: "brown",
+          //   fill: false,
+          //   label: "Force",
+          // },
+        ],
+      },
+      "Temperature (C)",
+      "Impact Energy (J)",
+    );
+  }, 200);
 
   currentStepProgress = 5;
 }
