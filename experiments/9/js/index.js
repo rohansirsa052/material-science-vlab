@@ -590,7 +590,7 @@ function showGraph() {
       {
         page: 1,
         title: "Age Hardening in Aluminium Alloy",
-        image: "images/hardness.png",
+        image: "images/hardness2.jpg",
       },
     ],
   });
