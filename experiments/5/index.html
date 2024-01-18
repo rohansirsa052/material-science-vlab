@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Experiment 5</title>
     <link rel="stylesheet" href="css/main.css" />
-   
+
     <script>
       var SAMPLE_ASSETS_PATH = "images/sample/";
     </script>
@@ -29,7 +29,7 @@
                     <img src="images/sample.png" alt="" width="60" />
                     <h6>Cast-iron Sample</h6>
                   </div>
-                 
+
                   <!-- <div class="p-1 pointer" onclick="loadSample('steel')" title="Click to select this sample.">
                     <img src="images/sample1.png" alt="" width="60" />
                     <h6>Mild Steel Sample</h6>
@@ -37,7 +37,7 @@
                 </div>
               </div>
 
-             <div id="step2" class="box disabled">
+              <div id="step2" class="box disabled">
                 <div class="label">Step 2: Adjust machine and place the sample</div>
                 <div class="content">
                   <ul>
@@ -48,17 +48,16 @@
 
               <div id="step3" class="box disabled">
                 <div class="label">Step 3: Start the test.</div>
-                
+
                 <div class="content">
                   <ul>
                     <li>Click below buttons to start the machine.</li>
                   </ul>
                   <div class="mt-1">
-                    <button id="startTest">Start Test</button>
-                    <button id="showGraphBtn" onclick="showGraph()" disabled>Plot</button>
+                    <button id="startTest">Perform Test 1</button>
+                    <button id="btnReset" disabled>Reset</button>
+                    <!-- <button id="showGraphBtn" onclick="showGraph()" disabled>Plot</button> -->
                   </div>
-
-                  <canvas id="outputGraphA"></canvas>
 
                   <div class="mt-1 dataTable">
                     <table>
@@ -66,10 +65,9 @@
                         <tr>
                           <td>Temperature (C)</td>
                           <td>Impact Energy (J)</td>
-                    
                         </tr>
                       </thead>
-                      <tbody id="testData"></tbody>
+                      <tbody id="impactTestResult"></tbody>
                     </table>
                   </div>
                 </div>
@@ -84,11 +82,44 @@
                 <div class="label">Step 5: Results.</div>
                 <div class="content">
                   <div>
-                    <img src="images/results/output.bmp" alt="" style="width: 100%" />
+                    <h4>Different characteristics temperatures obtained from the curve obtained from Impact test.</h4>
+                    <table>
+                      <tr>
+                        <td>FTP (T1)</td>
+                        <td>90 ℃</td>
+                      </tr>
+                      <tr>
+                        <td>NDT (T5)</td>
+                        <td>-15 ℃</td>
+                      </tr>
+                      <tr>
+                        <td>DTT (T4)</td>
+                        <td>25 J</td>
+                      </tr>
+                      <tr>
+                        <td>T3 (average of lower & upper half shelves)</td>
+                        <td>37.5 ℃</td>
+                      </tr>
+                    </table>
+
+                    <!-- <img src="images/result.jpg" alt="" style="width: 100%" /> -->
+                    <canvas id="outputGraphA"></canvas>
+
+                    <div class="mt-1 dataTable">
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>Temperature (C)</td>
+                            <td>Impact Energy (J)</td>
+                          </tr>
+                        </thead>
+                        <tbody id="testData"></tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
 
             <div class="actions">
               <button class="btn" id="btnNext" onclick="handle()">Next</button>
@@ -106,8 +137,6 @@
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
     <script src="js/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> 
-
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
   </body>
 </html>
