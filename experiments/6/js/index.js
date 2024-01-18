@@ -1,124 +1,72 @@
 const charts = {};
 const schema = ["elongation", "time"];
 const readingData1 = [
-  [0.01, 0.38],
-  //[0.89, 0.43],
-  [3.37, 0.45],
-  //[6.07, 0.48],
-  [9.19, 0.5],
-  //[12.17, 0.51],
-  [15.15, 0.52],
-  //[18.12, 0.53],
-  [21.1, 0.53],
-  //[24.08, 0.55],
-  [27.05, 0.56],
-  //[30.03, 0.57],
-  [33.01, 0.58],
-  // [35.98, 0.58],
-  [38.96, 0.59],
-  //[41.94, 0.60],
-  [44.91, 0.61],
-  // [47.89, 0.62],
-  [50.87, 0.62],
-  //[53.84, 0.63],
-  [56.82, 0.64],
-  // [59.80, 0.64],
-  [62.77, 0.65],
-  //[65.75, 0.66],
-  [68.73, 0.66],
-  //[71.70, 0.67],
-  [74.68, 0.67],
-  //[77.66, 0.68],
-  [80.63, 0.69],
-  //[83.61, 0.70],
-  [86.59, 0.7],
-  //[89.56, 0.71],
-  [92.54, 0.72],
-  //[95.52, 0.73],
-  [98.49, 0.74],
-  //[101.47, 0.74],
-  [104.45, 0.76],
-  //[107.42, 0.78],
-  [110.33, 0.8],
-  //[113.58, 0.83],
-  [116.15, 0.86],
-  //[118.50, 0.90],
-  [119.4, 0.9],
-  //[121.14, 0.94],
-  [121.48, 0.96],
-  //[123.84, 1.03],
-  [123.84, 1.03],
-  //[126.73, 1.10],
-  [126.23, 1.04],
-  //[127.40, 1.16],
-  [128.95, 1.33],
+  [0, 0.38],
+  [3, 0.45],
+  [9, 0.5],
+  [15, 0.52],
+  [21, 0.53],
+  [27, 0.56],
+  [33, 0.58],
+  [39, 0.59],
+  [45, 0.61],
+  [50, 0.62],
+  [56, 0.64],
+  [62, 0.65],
+  [68, 0.66],
+  [75, 0.67],
+  [80, 0.69],
+  [86, 0.7],
+  [92, 0.72],
+  [98, 0.74],
+  [104, 0.76],
+  [110, 0.8],
+  [116, 0.86],
+  [119, 0.9],
+  [121, 0.96],
+  [123, 1.03],
+  [126, 1.04],
+  [128, 1.33],
 ];
 
 const readingData2 = [
-  [0.01, 0.41],
-  //[2.71, 0.45],
-  [4.94, 0.5],
-  //[7.13, 0.54],
-  [10.16, 0.57],
-  //[13.16, 0.60],
-  [16.27, 0.61],
-  //[19.12, 0.63],
-  [22.09, 0.65],
-  //[25.07, 0.67],
-  [28.05, 0.68],
-  //[31.02, 0.70],
-  [34.0, 0.71],
-  //[36.97, 0.73],
-  [39.9, 0.75],
-  //[42.93, 0.78],
-  [45.84, 0.79],
-  //[48.88, 0.81],
-  [51.86, 0.83],
-  //[54.93, 0.84],
-  [57.81, 0.86],
-  //[60.79, 0.88],
-  [63.76, 0.9],
-  //[66.93, 0.92],
-  [69.65, 0.94],
-  //[72.69, 0.96],
-  [75.73, 0.98],
-  //[78.78, 1.01],
-  [81.45, 1.03],
-  //[84.60, 1.06],
-  [87.18, 1.1],
-  //[89.71, 1.14],
-  [89.89, 1.1],
-  //[92.54, 1.16],
-  [94.78, 1.21],
-  //[95.52, 1.18],
-  [97.62, 1.24],
-  //[97.83, 1.19],
-  [99.99, 1.28],
-  //[101.29, 1.32],
-  [102.7, 1.38],
-  //[104.03, 1.45],
+  [0, 0.41],
+  [5, 0.5],
+  [10, 0.57],
+  [16, 0.61],
+  [22, 0.65],
+  [28, 0.68],
+  [34, 0.71],
+  [40, 0.75],
+  [45, 0.79],
+  [51, 0.83],
+  [58, 0.86],
+  [63, 0.9],
+  [70, 0.94],
+  [75, 0.98],
+  [81, 1.03],
+  [87, 1.1],
+  [89, 1.1],
+  [94, 1.21],
+  [97, 1.24],
+  [100, 1.28],
+  [103, 1.38],
 ];
 const readingData3 = [
-  [0.01, 0.87],
-  [0.02, 0.78],
-  [0.03, 0.75],
-  [1.12, 0.92],
-  [1.3, 0.83],
-  [1.61, 1.01],
-  [1.52, 0.97],
-  [3.57, 1.06],
+  [0, 0.87],
+  [0.5, 0.75],
+  [1, 0.92],
+  [1.5, 0.83],
+  [1.6, 1.01],
+  [3.5, 1.06],
   [5.39, 1.11],
-  [7.21, 1.15],
-  [9.16, 1.19],
-  [10.7, 1.23],
-  [12.48, 1.31],
-  [12.17, 1.27],
-  [13.91, 1.36],
-  [15.08, 1.45],
-  [14.55, 1.4],
-  [15.8, 1.53],
-  [14.82, 1.49],
-  [16.13, 1.59],
+  [7, 1.15],
+  [9, 1.19],
+  [10, 1.23],
+  [12, 1.31],
+  [14, 1.36],
+  [15, 1.45],
+  [16, 1.59],
 ];
 
 // x axis
@@ -153,7 +101,7 @@ const time3 = [
 ];
 
 const elongation3 = [
-  0.87, 0.78, 0.75, 0.92, 0.83, 1.01, 0.97, 1.06, 1.11, 1.15, 1.91, 1.24, 1.31, 1.27, 1.36, 1.45, 1.4, 1.53, 1.49, 1.59,
+  0.87, 0.78, 0.75, 0.92, 0.83, 1.01, 0.97, 1.06, 1.11, 1.15, 1.18, 1.24, 1.31, 1.27, 1.36, 1.45, 1.4, 1.53, 1.49, 1.59,
 ];
 
 var currPos = 0;
@@ -188,8 +136,8 @@ function handleStep1() {
     return;
   }
 
-  if (len < 42 || len > 45) {
-    alert("Wrong readings! Please take your reading correctly via vernier caliper. (Range must be in b/w 42 to 45 mm)");
+  if (len < 48 || len > 53) {
+    alert("Wrong readings! Please take your reading correctly via vernier caliper. (Range must be in b/w 48 to 53 mm)");
     return;
   }
 
@@ -262,7 +210,7 @@ function handleStep3() {
       ],
     },
     "Time in hrs",
-    "Strain"
+    "Elongation (ΔL)"
   );
 
   document.getElementById("btnNext").disabled = true;
@@ -326,7 +274,7 @@ function handleStep3() {
         ],
       };
 
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
 
       // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
     }, 500);
@@ -379,7 +327,7 @@ function handleStep3() {
           },
         ],
       };
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
 
       // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
     }, 500);
@@ -436,7 +384,7 @@ function handleStep3() {
           },
         ],
       };
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Strain");
+      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
 
       // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
     }, 500);
@@ -504,6 +452,23 @@ function handleStep4() {
   modal.show();
 }
 
+// function handleStep5() {
+//   let pane = document.getElementById("step5");
+
+//   pane.classList.add("done");
+//   pane.classList.remove("active");
+
+//   let next = document.getElementById("step6");
+//   next.classList.add("active");
+//   next.classList.remove("disabled");
+
+//   currentStepProgress = 6;
+
+//   if (vc) vc.init();
+//   if (utm) utm.destory();
+//   if (sample1) sample1.init();
+// }
+
 function handleStep5() {
   let pane = document.getElementById("step5");
 
@@ -514,29 +479,12 @@ function handleStep5() {
   next.classList.add("active");
   next.classList.remove("disabled");
 
-  currentStepProgress = 6;
-
-  if (vc) vc.init();
-  if (utm) utm.destory();
-  if (sample1) sample1.init();
-}
-
-function handleStep6() {
-  let pane = document.getElementById("step6");
-
-  pane.classList.add("done");
-  pane.classList.remove("active");
-
-  let next = document.getElementById("step7");
-  next.classList.add("active");
-  next.classList.remove("disabled");
-
   
   let btn = document.getElementById("btnNext");
   btn.disabled = true;
   btn.innerHTML = "Finished";
 
-  currentStepProgress = 6;
+  currentStepProgress = 5;
 }
 
 function plotGraph(graphCtx, data, labelX, labelY) {
@@ -567,6 +515,10 @@ function plotGraph(graphCtx, data, labelX, labelY) {
                 steps: 20,
                 stepValue: 10,
                 // max: Math.max(...time1),
+                callback: function(label, index, labels) {
+                  const n = Number(label);
+                  return isNaN(n) ? label : Math.round(n); 
+                }
               },
               // stacked: true,
             },
@@ -599,7 +551,7 @@ function showGraph() {
       {
         page: 1,
         title: "Creep Test Curve",
-        image: "images/creep_test_curve.png",
+        image: "images/img/results.jpeg",
       },
     ],
   });
