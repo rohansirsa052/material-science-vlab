@@ -203,7 +203,7 @@ function handleStep3() {
       datasets: [
         {
           data: [],
-          borderColor: "#3e95cd",
+          borderColor: "#000",
           fill: false,
           label: "Test 1",
         },
@@ -214,180 +214,201 @@ function handleStep3() {
   );
 
   document.getElementById("btnNext").disabled = true;
+
+  let isFirstDone = false;
+  let isSecondDone = false;
+
+  document.getElementById("changeSample").addEventListener("click", () => {
+    document.getElementById("startTest").disabled = false;
+    document.getElementById("changeSample").disabled = true;
+  });
+
   document.getElementById("startTest").addEventListener("click", function testHandler(e) {
     e.currentTarget.disabled = true;
     document.getElementById("btnNext").disabled = true;
     // document.getElementById("arrowNext").classList.add("disabled");
     e.currentTarget.innerHTML = "Running...";
 
-    utm.setConfig({
-      yield_point: 10, // no yield point
-      breaking_point: 0.65,
-      finish_point: 0.7,
-    });
+    if (isFirstDone == false) {
+      let intr1 = setInterval(() => {
+        if (currPos >= readingData1.length) {
+          clearInterval(intr1);
+          isFirstDone = true;
+          currPos = 0;
+          document.getElementById("startTest").innerHTML = "Start Test";
+          document.getElementById("changeSample").disabled = false;
+          // document.getElementById("startTest").disabled = false;
+          // document.getElementById("startTest").innerHTML = "Done";
+          // document.getElementById("showGraphBtn").disabled = false;
+          // utm.stop();
+          // document.getElementById("btnNext").disabled = false;
+          // document.getElementById("arrowNext").classList.remove("disabled");
+          return;
+        }
 
-    setTimeout(() => {
-      utm.start(0.015, 1);
-    }, 4000);
+        const tableData1 = readingData1; // Change to the appropriate data array for Table 1 (readingData1, readingData2, or readingData3)
 
-    let isFirstDone = false;
-    let isSecondDone = false;
+        const tableBody1 = document.getElementById("testData1");
 
-    let intr1 = setInterval(() => {
-      if (currPos >= readingData1.length) {
-        clearInterval(intr1);
-        isFirstDone = true;
-        currPos = 0;
-        // document.getElementById("startTest").disabled = false;
-        // document.getElementById("startTest").innerHTML = "Done";
-        // document.getElementById("showGraphBtn").disabled = false;
-        // utm.stop();
-        // document.getElementById("btnNext").disabled = false;
-        // document.getElementById("arrowNext").classList.remove("disabled");
-        return;
-      }
-
-      const tableData1 = readingData1; // Change to the appropriate data array for Table 1 (readingData1, readingData2, or readingData3)
-
-      const tableBody1 = document.getElementById("testData1");
-
-      tableBody1.innerHTML += `
+        tableBody1.innerHTML += `
         <tr>
           <td>${tableData1[currPos][0]}</td>
           <td>${tableData1[currPos][1]}</td>
         </tr>
       `;
 
-      currPos++;
+        currPos++;
 
-      let progress1 = (elongation1.length / tableData1.length) * currPos;
+        let progress1 = (elongation1.length / tableData1.length) * currPos;
 
-      const chart1Data = {
-        labels: time1,
-        datasets: [
-          {
-            data: elongation1.slice(0, progress1),
-            borderColor: "#3e95cd",
-            fill: false,
-            label: "Test 1",
-          },
-        ],
-      };
+        const chart1Data = {
+          labels: time1,
+          datasets: [
+            {
+              data: elongation1.slice(0, progress1),
+              borderColor: "#000",
+              fill: false,
+              label: "Test 1",
+            },
+          ],
+        };
 
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
+        plotGraph(
+          document.getElementById("outputGraphA").getContext("2d"),
+          chart1Data,
+          "Time in hrs",
+          "Elongation (ΔL)"
+        );
 
-      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-    }, 500);
+        // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+      }, 500);
+    }
 
-    let intr2 = setInterval(() => {
-      if (!isFirstDone) return;
+    if (isFirstDone && isSecondDone == false) {
+      let intr2 = setInterval(() => {
+        if (!isFirstDone) return;
 
-      if (currPos >= readingData2.length) {
-        clearInterval(intr2);
-        isSecondDone = true;
-        currPos = 0;
-        // document.getElementById("startTest").disabled = false;
-        // document.getElementById("startTest").innerHTML = "Done";
-        // document.getElementById("showGraphBtn").disabled = false;
-        // utm.stop();
-        // document.getElementById("btnNext").disabled = false;
-        // document.getElementById("arrowNext").classList.remove("disabled");
-        return;
-      }
+        if (currPos >= readingData2.length) {
+          clearInterval(intr2);
+          isSecondDone = true;
+          currPos = 0;
+          document.getElementById("startTest").innerHTML = "Start Test";
+          document.getElementById("changeSample").disabled = false;
+          // document.getElementById("startTest").disabled = false;
+          // document.getElementById("startTest").innerHTML = "Done";
+          // document.getElementById("showGraphBtn").disabled = false;
+          // utm.stop();
+          // document.getElementById("btnNext").disabled = false;
+          // document.getElementById("arrowNext").classList.remove("disabled");
+          return;
+        }
 
-      const tableData2 = readingData2; // Change to the appropriate data array for Table 2 (readingData1, readingData2, or readingData3)
+        const tableData2 = readingData2; // Change to the appropriate data array for Table 2 (readingData1, readingData2, or readingData3)
 
-      const tableBody2 = document.getElementById("testData2"); // Change to the appropriate table body ID for Table 2 (testData1
+        const tableBody2 = document.getElementById("testData2"); // Change to the appropriate table body ID for Table 2 (testData1
 
-      tableBody2.innerHTML += `
+        tableBody2.innerHTML += `
         <tr>
           <td>${tableData2[currPos][0]}</td>
           <td>${tableData2[currPos][1]}</td>
         </tr>
       `;
 
-      currPos++;
+        currPos++;
 
-      let progress1 = (elongation2.length / tableData2.length) * currPos;
+        let progress1 = (elongation2.length / tableData2.length) * currPos;
 
-      const chart1Data = {
-        labels: time1,
-        datasets: [
-          {
-            data: elongation1,
-            borderColor: "#3e95cd",
-            fill: false,
-            label: "Test 1",
-          },
-          {
-            data: elongation2.slice(0, progress1),
-            borderColor: "#ff5733", // Choose a different color
-            fill: false,
-            label: "Test 2",
-          },
-        ],
-      };
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
+        const chart1Data = {
+          labels: time1,
+          datasets: [
+            {
+              data: elongation1,
+              borderColor: "#000",
+              fill: false,
+              label: "Test 1",
+            },
+            {
+              data: elongation2.slice(0, progress1),
+              borderColor: "#ff5733", // Choose a different color
+              fill: false,
+              label: "Test 2",
+            },
+          ],
+        };
+        plotGraph(
+          document.getElementById("outputGraphA").getContext("2d"),
+          chart1Data,
+          "Time in hrs",
+          "Elongation (ΔL)"
+        );
 
-      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-    }, 500);
+        // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+      }, 500);
+    }
 
-    let intr3 = setInterval(() => {
-      if (!isSecondDone) return;
+    if (isFirstDone && isSecondDone) {
+      let intr3 = setInterval(() => {
+        if (!isSecondDone) return;
 
-      if (currPos >= readingData3.length) {
-        clearInterval(intr3);
-        document.getElementById("startTest").disabled = false;
-        document.getElementById("startTest").innerHTML = "Done";
-        document.getElementById("showGraphBtn").disabled = false;
-        utm.stop();
-        document.getElementById("btnNext").disabled = false;
-        // document.getElementById("arrowNext").classList.remove("disabled");
-        return;
-      }
+        if (currPos >= readingData3.length) {
+          clearInterval(intr3);
+          document.getElementById("startTest").disabled = false;
+          document.getElementById("startTest").innerHTML = "Done";
+          // document.getElementById("showGraphBtn").disabled = false;
+          utm.stop();
+          document.getElementById("btnNext").disabled = false;
+          // document.getElementById("arrowNext").classList.remove("disabled");
+          return;
+        }
 
-      const tableData3 = readingData3; // Change to the appropriate data array for Table 3 (readingData1, readingData2, or readingData3)
+        const tableData3 = readingData3; // Change to the appropriate data array for Table 3 (readingData1, readingData2, or readingData3)
 
-      const tableBody3 = document.getElementById("testData3"); // Change to the appropriate table body ID for Table 3 (testData1, testData2, or testData3)
+        const tableBody3 = document.getElementById("testData3"); // Change to the appropriate table body ID for Table 3 (testData1, testData2, or testData3)
 
-      tableBody3.innerHTML += `
+        tableBody3.innerHTML += `
         <tr>
           <td>${tableData3[currPos][0]}</td>
           <td>${tableData3[currPos][1]}</td>
         </tr>
       `;
 
-      currPos++;
+        currPos++;
 
-      let progress1 = (elongation3.length / tableData3.length) * currPos;
+        let progress1 = (elongation3.length / tableData3.length) * currPos;
 
-      const chart1Data = {
-        labels: time1,
-        datasets: [
-          {
-            data: elongation1,
-            borderColor: "#3e95cd",
-            fill: false,
-            label: "Test 1",
-          },
-          {
-            data: elongation2,
-            borderColor: "#ff5733", // Choose a different color
-            fill: false,
-            label: "Test 2",
-          },
-          {
-            data: elongation3.slice(0, progress1),
-            borderColor: "#00ff00", // Choose a different color
-            fill: false,
-            label: "Test 3",
-          },
-        ],
-      };
-      plotGraph(document.getElementById("outputGraphA").getContext("2d"), chart1Data, "Time in hrs", "Elongation (ΔL)");
+        const chart1Data = {
+          labels: time1,
+          datasets: [
+            {
+              data: elongation1,
+              borderColor: "#000",
+              fill: false,
+              label: "Test 1",
+            },
+            {
+              data: elongation2,
+              borderColor: "#ff5733", // Choose a different color
+              fill: false,
+              label: "Test 2",
+            },
+            {
+              data: elongation3.slice(0, progress1),
+              borderColor: "#3e95cd", // Choose a different color
+              fill: false,
+              label: "Test 3",
+            },
+          ],
+        };
+        plotGraph(
+          document.getElementById("outputGraphA").getContext("2d"),
+          chart1Data,
+          "Time in hrs",
+          "Elongation (ΔL)"
+        );
 
-      // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-    }, 500);
+        // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
+      }, 500);
+    }
   });
 
   pane.classList.add("done");
@@ -399,6 +420,7 @@ function handleStep3() {
 
   currentStepProgress = 4;
 }
+
 function handleStep4() {
   let pane = document.getElementById("step4");
 
@@ -409,6 +431,40 @@ function handleStep4() {
   next.classList.add("active");
   next.classList.remove("disabled");
   utm.destory();
+  currentStepProgress = 5;
+}
+
+// function handleStep5() {
+//   let pane = document.getElementById("step5");
+
+//   pane.classList.add("done");
+//   pane.classList.remove("active");
+
+//   let next = document.getElementById("step6");
+//   next.classList.add("active");
+//   next.classList.remove("disabled");
+
+//   currentStepProgress = 6;
+
+//   if (vc) vc.init();
+//   if (utm) utm.destory();
+//   if (sample1) sample1.init();
+// }
+
+function handleStep5() {
+  let pane = document.getElementById("step5");
+
+  pane.classList.add("done");
+  pane.classList.remove("active");
+
+  let next = document.getElementById("step6");
+  next.classList.add("active");
+  next.classList.remove("disabled");
+
+  let btn = document.getElementById("btnNext");
+  btn.disabled = true;
+  btn.innerHTML = "Finished";
+
   currentStepProgress = 5;
 
   modal = new Modal({
@@ -447,44 +503,13 @@ function handleStep4() {
         correct: 0,
       },
     ],
-    onClose: handleStep5,
+    onClose: () => {
+      let pane = document.getElementById("step6");
+      pane.classList.add("done");
+      pane.classList.remove("active");
+    },
   });
   modal.show();
-}
-
-// function handleStep5() {
-//   let pane = document.getElementById("step5");
-
-//   pane.classList.add("done");
-//   pane.classList.remove("active");
-
-//   let next = document.getElementById("step6");
-//   next.classList.add("active");
-//   next.classList.remove("disabled");
-
-//   currentStepProgress = 6;
-
-//   if (vc) vc.init();
-//   if (utm) utm.destory();
-//   if (sample1) sample1.init();
-// }
-
-function handleStep5() {
-  let pane = document.getElementById("step5");
-
-  pane.classList.add("done");
-  pane.classList.remove("active");
-
-  let next = document.getElementById("step6");
-  next.classList.add("active");
-  next.classList.remove("disabled");
-
-  
-  let btn = document.getElementById("btnNext");
-  btn.disabled = true;
-  btn.innerHTML = "Finished";
-
-  currentStepProgress = 5;
 }
 
 function plotGraph(graphCtx, data, labelX, labelY) {
@@ -515,10 +540,10 @@ function plotGraph(graphCtx, data, labelX, labelY) {
                 steps: 20,
                 stepValue: 10,
                 // max: Math.max(...time1),
-                callback: function(label, index, labels) {
+                callback: function (label, index, labels) {
                   const n = Number(label);
-                  return isNaN(n) ? label : Math.round(n); 
-                }
+                  return isNaN(n) ? label : Math.round(n);
+                },
               },
               // stacked: true,
             },
