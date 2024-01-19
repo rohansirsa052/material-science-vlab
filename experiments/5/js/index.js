@@ -110,21 +110,21 @@ function handleStep2() {
   pane.classList.remove("active");
 
   //plot blank graph init graphs
-  plotGraph(
-    document.getElementById("outputGraphA").getContext("2d"),
-    {
-      labels: temperature,
-      datasets: [
-        {
-          data: [],
-          borderColor: "#3e95cd",
-          fill: false,
-        },
-      ],
-    },
-    "Temperature (C)",
-    "Impact Energy (J)",
-  );
+  // plotGraph(
+  //   document.getElementById("outputGraphA").getContext("2d"),
+  //   {
+  //     labels: temperature,
+  //     datasets: [
+  //       {
+  //         data: [],
+  //         borderColor: "#3e95cd",
+  //         fill: false,
+  //       },
+  //     ],
+  //   },
+  //   "Temperature (C)",
+  //   "Impact Energy (J)",
+  // );
 
   document.getElementById("btnNext").disabled = true;
 
@@ -189,6 +189,63 @@ function handleStep3() {
   next.classList.remove("disabled");
 
   currentStepProgress = 4;
+}
+
+function handleStep4() {
+  let pane = document.getElementById("step4");
+
+  pane.classList.add("done");
+  pane.classList.remove("active");
+
+  let next = document.getElementById("step5");
+  next.classList.add("active");
+  next.classList.remove("disabled");
+
+  // let tableBody = document.getElementById("testData");
+     
+  // let intr = setInterval(() => {
+  //   if (currPos >= totalSteps) {
+  //     clearInterval(intr);
+  //     mit.stop();
+  //     return;
+  //   }
+
+  //   tableBody.innerHTML += `
+  //         <tr>
+  //           <td>${temperature[currPos]}</td>
+  //           <td>${ Impact_Energy[currPos]}</td>
+  //         </tr>
+  //       `;
+  //   currPos++;
+
+  //   let progress1 = ( Impact_Energy.length / totalSteps) * currPos;
+  //   plotGraph(
+  //     document.getElementById("outputGraphA").getContext("2d"),
+  //     {
+  //       labels: temperature,
+  //       datasets: [
+  //         {
+  //           yAxisID: "A",
+  //           data:  Impact_Energy.slice(0, progress1),
+  //           borderColor: "#3e95cd",
+  //           fill: false,
+  //           // label: "Temperature",
+  //         },
+  //         // {
+  //         //   yAxisID: "B",
+  //         //   data: force.slice(0, progress1),
+  //         //   borderColor: "brown",
+  //         //   fill: false,
+  //         //   label: "Force",
+  //         // },
+  //       ],
+  //     },
+  //     "Temperature (C)",
+  //     "Impact Energy (J)",
+  //   );
+  // }, 200);
+
+  currentStepProgress = 5;
 
   modal = new Modal({
     title: "Can you answer the questions?",
@@ -284,68 +341,10 @@ function handleStep3() {
       },
 
 
-
     ],
-    onClose: handleStep4,
+    onClose: handleStep5,
   });
   modal.show();
-}
-
-function handleStep4() {
-  let pane = document.getElementById("step4");
-
-  pane.classList.add("done");
-  pane.classList.remove("active");
-
-  let next = document.getElementById("step5");
-  next.classList.add("active");
-  next.classList.remove("disabled");
-
-  let tableBody = document.getElementById("testData");
-     
-  let intr = setInterval(() => {
-    if (currPos >= totalSteps) {
-      clearInterval(intr);
-      mit.stop();
-      return;
-    }
-
-    tableBody.innerHTML += `
-          <tr>
-            <td>${temperature[currPos]}</td>
-            <td>${ Impact_Energy[currPos]}</td>
-          </tr>
-        `;
-    currPos++;
-
-    let progress1 = ( Impact_Energy.length / totalSteps) * currPos;
-    plotGraph(
-      document.getElementById("outputGraphA").getContext("2d"),
-      {
-        labels: temperature,
-        datasets: [
-          {
-            yAxisID: "A",
-            data:  Impact_Energy.slice(0, progress1),
-            borderColor: "#3e95cd",
-            fill: false,
-            // label: "Temperature",
-          },
-          // {
-          //   yAxisID: "B",
-          //   data: force.slice(0, progress1),
-          //   borderColor: "brown",
-          //   fill: false,
-          //   label: "Force",
-          // },
-        ],
-      },
-      "Temperature (C)",
-      "Impact Energy (J)",
-    );
-  }, 200);
-
-  currentStepProgress = 5;
 }
 
 function handleStep5() {
