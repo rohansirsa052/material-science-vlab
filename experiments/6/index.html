@@ -105,9 +105,10 @@
                   </ul>
 
                   <div class="mt-1">
-                    <button id="startTest">Start Test</button>
+                    <button id="startTest" disabled>Start Test</button>
                     <button id="changeSample" disabled>Next Test</button>
                     <!-- <button id="showGraphBtn" onclick="showGraph()" disabled>Plot</button> -->
+                    <span>[Furnace Temp: <span id="furnaceTemp">25</span> ℃]</span>
                   </div>
 
                   <canvas id="outputGraphA"></canvas>
@@ -161,6 +162,18 @@
                   <h4>Creep curves at different stresses and corresponding values obtained from creep curves.</h4>
                   <!-- Add your image here -->
                   <img src="images/img/results.jpeg" alt="Step 5 Image" width="100%" />
+                  <ul>
+                    <li>
+                      Region I is primary creep regime, Region II is secondary creep regime (creep rate is minimum and stable) and Region III is tertiary Creep regime
+                    </li>
+                    <li>
+                      The creep rate is increasing with increasing stress and is as represented
+                      σ3 > σ2 > σ1 
+                    </li>
+                    <li>
+                      In Curve 1 (500 MPa) and 2 (549 MPa) we can clearly demarcate the primary and secondary creep. In case of 3 (602 MPa) curve the deformation is rapid and primary creep is very limited.
+                    </li>
+                  </ul>
                   <div class="mt-1 dataTable">
                     <table id="imageTable">
                       <thead>
