@@ -40,7 +40,7 @@
                 </div>
               </div>
 
-              <div id="step3" class="box disabled">
+              <div id="step3" class="box disabled2">
                 <div class="label">Step 3: Start the test.</div>
                 <div class="content">
                   <ul>
@@ -48,11 +48,14 @@
                   </ul>
                   <div class="mt-1">
                     <button id="startTest">Start Test</button>
+                    <button id="btnReset" disabled>Next Sample</button>
                   </div>
 
                   <canvas id="outputGraphA"></canvas>
+                  <canvas id="outputGraphB"></canvas>
 
-                  <div class="mt-1 dataTable">
+                  <h5>Steel Sample</h5>
+                  <div class="mt-1 mb-2 dataTable">
                     <table>
                       <thead>
                         <tr>
@@ -61,6 +64,20 @@
                         </tr>
                       </thead>
                       <tbody id="testData"></tbody>
+                    </table>
+                  </div>
+
+
+                  <h5>Aluminium Sample</h5>
+                  <div class="mt-1 dataTable">
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>No. of cycles (in No.s)</td>
+                          <td>Amplitude Stress (MPa)</td>
+                        </tr>
+                      </thead>
+                      <tbody id="testData2"></tbody>
                     </table>
                   </div>
                 </div>

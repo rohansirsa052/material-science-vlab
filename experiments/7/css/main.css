@@ -56,6 +56,12 @@ p {
 .pointer{
   cursor: pointer;
 }
+.mb-2{
+  margin-bottom: 20px;
+}
+.mb-1{
+  margin-bottom: 10px;
+}
 
 .slider {
   padding: 6px;
