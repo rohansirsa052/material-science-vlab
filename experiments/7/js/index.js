@@ -2,18 +2,12 @@ const charts = {};
 const totalSteps = 10;
 const DATA_UPDATE_ANIMATION_DELAY = 600;
 
-// const temperature = [1.06E+04, 1.56E+04, 1.61E+04, 2.22E+04, 2.50E+04, 3.78E+04, 5.54E+04, 7.22E+04, 1.09E+05, 1.09E+05, 1.85E+05, 1.90E+05, 3.54E+05, 4.61E+05, 8.31E+05, 9.36E+05, 1.42E+06, 1.69E+06, 2.71E+06, 3.64E+06, 5.20E+06, 8.84E+06, 1.55E+07, 2.97E+07, 6.60E+07, 9.72E+07, 1.91E+08, 3.57E+08, 4.65E+08, 7.69E+08, 1.35E+09, 3.00E+09, 3.38E+09, 5.26E+09, 7.72E+09
-// ];
-
 const temperature = [
   6.74e3, 9.87e3, 1.15e4, 2.06e4, 2.12e4, 4.57e4, 5.77e4, 9.82e4, 1.48e5, 2.92e5, 4.82e5, 7.52e5, 1.2e6, 1.99e6, 2.91e6,
   4.68e6, 7.27e6, 1.04e7, 1.87e7, 2.67e7, 4.27e7, 7.28e7, 1.2e8, 1.87e8, 3.38e8, 5.42e8, 8.95e8, 1.71e9, 2.75e9, 3.59e9,
   5.92e9, 8.43e9,
 ];
 //in degree C
-
-// const Impact_Energy= [496, 491, 479, 473, 463, 454, 434, 424, 415, 399, 390, 375, 365, 343, 332, 330, 327, 314, 313, 321, 325, 314, 314, 316, 308, 327, 308, 322, 309, 318, 314, 311, 330, 317, 312
-// ];
 
 const Impact_Energy = [
   381, 354, 380, 338, 321, 304, 284, 278, 255, 242, 226, 229, 204, 196, 184, 184, 162, 162, 148, 162, 135, 134, 116,
@@ -72,8 +66,8 @@ function handleStep2() {
         },
       ],
     },
+    "No. of cycles (x10^7)",
     "Amplitude Stress (MPa)",
-    "No. of cycles"
   );
 
   document.getElementById("btnNext").disabled = true;
@@ -126,8 +120,8 @@ function handleStep2() {
             },
           ],
         },
+        "No. of cycles (x10^7)",
         "Amplitude Stress (MPa)",
-        "No. of cycles"
       );
     }, DATA_UPDATE_ANIMATION_DELAY);
   });
@@ -324,6 +318,9 @@ function plotGraph(graphCtx, data, labelX, labelY) {
                 beginAtZero: true,
                 steps: 20,
                 stepValue: 10,
+                callback: function (value, index, values) {
+                  return parseFloat(value/1000).toLocaleString("en") + "K";
+                }
                 // max: Math.max(...temperature),
               },
               // stacked: true,
