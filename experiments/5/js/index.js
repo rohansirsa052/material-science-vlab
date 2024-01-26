@@ -1,66 +1,21 @@
 const charts = {};
-const totalSteps= 10;
+const totalSteps = 10;
 const DATA_UPDATE_ANIMATION_DELAY = 400;
 
-const temperature 
-//in degree C
+const temperature =
+  //in degree C
 
-= [
-  -60.5,
--60.5,
--50.7,
--50.7,
--40.3,
--40.3,
--20.2,
--20.2,
--10.5,
--10.5,
--0.1,
--0.1,
--0.1,
-9.7,
-10,
-22.6,
-22.6,
-30.4,
-29.4,
-40.1,
-39.8,
-49.9,
-50.2,
-49.9,
+  [
+    -60.5, -60.5, -50.7, -50.7, -40.3, -40.3, -20.2, -20.2, -10.5, -10.5, -0.1, -0.1, -0.1, 9.7, 10, 22.6, 22.6, 30.4,
+    29.4, 40.1, 39.8, 49.9, 50.2, 49.9,
+  ];
 
-];
+const Impact_Energy =
+  //Energy in Joules
 
-const Impact_Energy
-//Energy in Joules
-
-= [
-  5.4,
-  2.3,
-  6.3,
-  7.8,
-  5.6,
-  8.1,
-  5,
-  7.4,
-  9.5,
-  11.1,
-  15.6,
-  13.2,
-  10.7,
-  13.1,
-  11.3,
-  16.8,
-  22.6,
-  21.3,
-  26.2,
-  26.8,
-  31.4,
-  28,
-  31.3,
-  34.7,
+  [
+    5.4, 2.3, 6.3, 7.8, 5.6, 8.1, 5, 7.4, 9.5, 11.1, 15.6, 13.2, 10.7, 13.1, 11.3, 16.8, 22.6, 21.3, 26.2, 26.8, 31.4,
+    28, 31.3, 34.7,
   ];
 
 // in mN
@@ -75,7 +30,7 @@ var sampleFinalDiameter = 0;
 var subStepResult = [
   [-40.3, 8.1],
   [30.4, 21.3],
-  [79.6, 83.4]
+  [79.6, 83.4],
 ];
 
 document.getElementById("step1").classList.remove("disabled");
@@ -128,7 +83,7 @@ function handleStep2() {
 
   document.getElementById("btnNext").disabled = true;
 
-  let mode = '';
+  let mode = "";
   let subStepCnt = 0;
   const btnReset = document.getElementById("btnReset");
   const startBtn = document.getElementById("startTest");
@@ -148,7 +103,7 @@ function handleStep2() {
       mit.start();
     }, 500);
 
-    setTimeout(() => {      
+    setTimeout(() => {
       resultTable.innerHTML += `
         <tr>
           <td>${subStepResult[subStepCnt][0]}</td>
@@ -156,7 +111,7 @@ function handleStep2() {
         </tr>
       `;
 
-      if(subStepCnt == 2) {
+      if (subStepCnt == 2) {
         startBtn.innerHTML = "Done";
         document.getElementById("btnNext").disabled = false;
         return;
@@ -165,7 +120,6 @@ function handleStep2() {
       subStepCnt++;
       btnReset.disabled = false;
     }, 4000);
-
   });
 
   pane.classList.add("done");
@@ -202,7 +156,7 @@ function handleStep4() {
   next.classList.remove("disabled");
 
   // let tableBody = document.getElementById("testData");
-     
+
   // let intr = setInterval(() => {
   //   if (currPos >= totalSteps) {
   //     clearInterval(intr);
@@ -254,93 +208,95 @@ function handleStep4() {
         page: 1,
         title: "In the Charpy impact test the specimen is kept as:?",
         options: ["Fixed end beam", "Simply supported beam", "Cantilever beam", " Overhanging beam"],
-        correct: 2,
+        correct: 1,
       },
-
       {
         page: 2,
         title: "For impact test, T1 in the schematic below correspond to (T indicates temperature)?",
         image: "images/QuestionsImages/fig4.png",
         options: ["T1 - FTP", " T1 - DTT", " T1 - FATT", "T1 - NDT"],
-        correct: 1,
+        correct: 0,
       },
-    
       {
         page: 3,
         title: "In impact testing, Ductility Transition Temperature is the temperature at which the energy is: ",
-      
         options: [" 20 J", "30 J", "10 J", "40 J"],
-        correct: 1,
+        correct: 0,
       },
-    
       {
         page: 4,
         title: "In a hypothetical curve given below for impact testing, A might correspond to: ",
         image: "images/QuestionsImages/fig3.png",
         options: ["  Mild steel", "  Low carbon steel", "Chromium ", "Nickel"],
-        correct: 4,
-      },
-
-          {
-        page: 5,
-        title: "Which of the following is correct? ",
-    
-        options: [" In Izod test, the specimen is kept horizontally", " The angle of the V-notch specimen is 60o", " In Charpy test, the specimen is kept horizontally", "The initial height of the pendulum is the impact energy"],
         correct: 3,
       },
-
+      {
+        page: 5,
+        title: "Which of the following is correct? ",
+        options: [
+          " In Izod test, the specimen is kept horizontally",
+          " The angle of the V-notch specimen is 60o",
+          " In Charpy test, the specimen is kept horizontally",
+          "The initial height of the pendulum is the impact energy",
+        ],
+        correct: 2,
+      },
       {
         page: 6,
         title: "Fracture-appearance transition temperature, FATT corresponds to?",
-
-        options: ["  40 % cleavage fracture", " 50 % cleavage fracture", " 0 % cleavage fracture", "100 % cleavage fracture"],
-        correct: 2,
+        options: [
+          "40 % cleavage fracture",
+          " 50 % cleavage fracture",
+          " 0 % cleavage fracture",
+          "100 % cleavage fracture",
+        ],
+        correct: 1,
       },
-   
       {
         page: 7,
         title: "For impact test, T5 in the schematic below correspond to (T indicates temperature)",
         image: "images/QuestionsImages/fig4.png",
         options: ["  T5 - FTP", " T5 - DTT", " T5 - FATT", " T5 - NDT"],
-        correct: 4,
+        correct: 3,
       },
-
-
-
       {
         page: 8,
-        title: "Fracture surfaces of the same alloy are shown below from impact tests conducted at three different temperatures (T1, T2 and T3). Which one of them is true?",
+        title:
+          "Fracture surfaces of the same alloy are shown below from impact tests conducted at three different temperatures (T1, T2 and T3). Which one of them is true?",
         image: "images/QuestionsImages/fig2.png",
         options: ["  T1>T3>T2", "T3>T2>T1", " T3>T1>T2", "T2>T3>T1"],
-        correct: 1,
-      }, 
-
-
+        correct: 0,
+      },
       {
         page: 9,
         title: " In a hypothetical curve given below for impact testing, B might correspond to:",
         image: "images/QuestionsImages/fig3.png",
         options: ["  Copper", " Nickel", "Mild steel", " Aluminum "],
-        correct: 3,
+        correct: 2,
       },
-
       {
         page: 10,
         title: " Which of the following is correct? ",
-  
-        options: [" In Izod test, the pendulum hits on the opposite surface to that containing notch", "The impact energy is related to difference between initial and final height", "In Charpy test, the pendulum hits on the same surface that contains notch", "In India, we predominantly use Izod impact test"],
-        correct: 2,
-      },
-   
 
+        options: [
+          " In Izod test, the pendulum hits on the opposite surface to that containing notch",
+          "The impact energy is related to difference between initial and final height",
+          "In Charpy test, the pendulum hits on the same surface that contains notch",
+          "In India, we predominantly use Izod impact test",
+        ],
+        correct: 1,
+      },
       {
         page: 11,
         title: "The strain rates in impact test are: ",
-        options: ["  Slightly higher than tensile tests", " lower than tensile tests", "Almost similar to tensile tests", " Much higher than tensile tess"],
-        correct: 4,
+        options: [
+          "Slightly higher than tensile tests",
+          "Lower than tensile tests",
+          "Almost similar to tensile tests",
+          "Much higher than tensile tess",
+        ],
+        correct: 3,
       },
-
-
     ],
     onClose: handleStep5,
   });
@@ -407,7 +363,7 @@ function plotGraph(graphCtx, data, labelX, labelY) {
                 beginAtZero: true,
                 steps: 10,
                 stepValue: 5,
-                 max: Math.max(... Impact_Energy),
+                max: Math.max(...Impact_Energy),
                 //max: 2000,
               },
             },
