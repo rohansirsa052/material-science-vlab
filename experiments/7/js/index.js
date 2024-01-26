@@ -1,5 +1,5 @@
 const charts = {};
-const DATA_UPDATE_ANIMATION_DELAY = 600;
+const DATA_UPDATE_ANIMATION_DELAY = 400;
 
 const steelData = [
   [10600, 496],
@@ -209,7 +209,7 @@ function handleStep2() {
                 <td>${steelData[currPos][1]}</td>
               </tr>
             `;
-        let progress1 = (steelDataY.length / totalSteps) * (currPos+1);
+        let progress1 = (steelDataY.length / totalSteps) * (currPos + 1);
 
         plotGraph(
           document.getElementById("outputGraphA").getContext("2d"),
@@ -278,120 +278,6 @@ function handleStep3() {
   next.classList.remove("disabled");
 
   currentStepProgress = 4;
-
-  modal = new Modal({
-    title: "Can you answer the questions?",
-    body: [
-      {
-        page: 1,
-        title: "In the Charpy impact test the specimen is kept as:?",
-        options: ["Fixed end beam", "Simply supported beam", "Cantilever beam", " Overhanging beam"],
-        correct: 2,
-      },
-
-      {
-        page: 2,
-        title: "For impact test, T1 in the schematic below correspond to (T indicates temperature)?",
-        image: "images/QuestionsImages/fig4.png",
-        options: ["T1 - FTP", " T1 - DTT", " T1 - FATT", "T1 - NDT"],
-        correct: 1,
-      },
-
-      {
-        page: 3,
-        title: "In impact testing, Ductility Transition Temperature is the temperature at which the energy is: ",
-
-        options: [" 20 J", "30 J", "10 J", "40 J"],
-        correct: 1,
-      },
-
-      {
-        page: 4,
-        title: "In a hypothetical curve given below for impact testing, A might correspond to: ",
-        image: "images/QuestionsImages/fig3.png",
-        options: ["  Mild steel", "  Low carbon steel", "Chromium ", "Nickel"],
-        correct: 4,
-      },
-
-      {
-        page: 5,
-        title: "Which of the following is correct? ",
-
-        options: [
-          " In Izod test, the specimen is kept horizontally",
-          " The angle of the V-notch specimen is 60o",
-          " In Charpy test, the specimen is kept horizontally",
-          "The initial height of the pendulum is the impact energy",
-        ],
-        correct: 3,
-      },
-
-      {
-        page: 6,
-        title: "Fracture-appearance transition temperature, FATT corresponds to?",
-
-        options: [
-          "  40 % cleavage fracture",
-          " 50 % cleavage fracture",
-          " 0 % cleavage fracture",
-          "100 % cleavage fracture",
-        ],
-        correct: 2,
-      },
-
-      {
-        page: 7,
-        title: "For impact test, T5 in the schematic below correspond to (T indicates temperature)",
-        image: "images/QuestionsImages/fig4.png",
-        options: ["  T5 - FTP", " T5 - DTT", " T5 - FATT", " T5 - NDT"],
-        correct: 4,
-      },
-
-      {
-        page: 8,
-        title:
-          "Fracture surfaces of the same alloy are shown below from impact tests conducted at three different temperatures (T1, T2 and T3). Which one of them is true?",
-        image: "images/QuestionsImages/fig2.png",
-        options: ["  T1>T3>T2", "T3>T2>T1", " T3>T1>T2", "T2>T3>T1"],
-        correct: 1,
-      },
-
-      {
-        page: 9,
-        title: " In a hypothetical curve given below for impact testing, B might correspond to:",
-        image: "images/QuestionsImages/fig3.png",
-        options: ["  Copper", " Nickel", "Mild steel", " Aluminum "],
-        correct: 3,
-      },
-
-      {
-        page: 10,
-        title: " Which of the following is correct? ",
-
-        options: [
-          " In Izod test, the pendulum hits on the opposite surface to that containing notch",
-          "The impact energy is related to difference between initial and final height",
-          "In Charpy test, the pendulum hits on the same surface that contains notch",
-          "In India, we predominantly use Izod impact test",
-        ],
-        correct: 2,
-      },
-
-      {
-        page: 11,
-        title: "The strain rates in impact test are: ",
-        options: [
-          "  Slightly higher than tensile tests",
-          " lower than tensile tests",
-          "Almost similar to tensile tests",
-          " Much higher than tensile tess",
-        ],
-        correct: 4,
-      },
-    ],
-    onClose: handleStep4,
-  });
-  modal.show();
 }
 
 function handleStep4() {
@@ -403,6 +289,83 @@ function handleStep4() {
   let next = document.getElementById("step5");
   next.classList.add("active");
   next.classList.remove("disabled");
+
+  
+  modal = new Modal({
+    title: "Can you answer the questions?",
+    body: [
+      {
+        page: 1,
+        title: "What is the stress ratio for completely reversed cycle fatigue?",
+        options: ["0", "1", "-1", "∞"],
+        correct: 2,
+      },
+      {
+        page: 2,
+        title: "R-R Moore type fatigue testing machine is based on:",
+        options: ["Four-point bending", "Three-point bending", "Two-point bending", "Tensile loading"],
+        correct: 0,
+      },
+      {
+        page: 3,
+        title: "In high cycle fatigue, the components usually endure higher than:",
+        options: ["106 cycles", "105 cycles", "107 cycles", "104 cycles"],
+        correct: 3,
+      },
+      {
+        page: 4,
+        title: "If the maximum and minimum stresses in a cycle is 200 MPa and  ̶ 100 MPa, the stress range is:",
+        options: ["100", "150", "300", "50"],
+        correct: 2,
+      },
+      {
+        page: 5,
+        title:
+          "Consider R. R. Moore type machine. If the load is 100 N, arm length (or length of the sample) is 100 mm, and diameter is 4 mm, then peak stress (σa) is:",
+        options: ["398 MPa", "796 MPa", "1592 MPa", "1194 MPa"],
+        correct: 1,
+      },
+      {
+        page: 6,
+        title: "If the maximum and minimum stresses are 100 MPa and 0 MPa, then the R-ratio is:",
+        options: [" ̶ 1", "100", "0", "1"],
+        correct: 2,
+      },
+      {
+        page: 7,
+        title: "Fatigue is a degradation of mechanical properties under",
+        options: ["Tensile loading", "Cyclic loading", "Impact loading", "Constant loading"],
+        correct: 1,
+      },
+      {
+        page: 8,
+        title: "In low cycle fatigue, the components usually endure less than:",
+        options: ["104 cycles", "105 cycles", "106 cycles", "107 cycles"],
+        correct: 0,
+      },
+      {
+        page: 9,
+        title: "The mean stress for completely reversed cycle is:",
+        options: [" ̶ 1", "Cannot be comprehended.", "0", "1"],
+        correct: 2,
+      },
+      {
+        page: 10,
+        title:
+          "Consider vertical machine for fatigue testing (like tensile testing). If the cross-sectional area of the sample is 10 mm2, maximum load is 1000 N and minimum load is 100 N, then the stress amplitude is:",
+        options: ["90 MPa", "45 MPa", "55 MPa", "100 MPa"],
+        correct: 1,
+      },
+      {
+        page: 11,
+        title: "Fatigue strength is the stress level corresponding to the number of cycles of:",
+        options: ["106 cycles", "105 cycles", "109 cycles", "107 cycles"],
+        correct: 3,
+      },
+    ],
+    onClose: handleStep5,
+  });
+  modal.show();
 
   currentStepProgress = 5;
 }
