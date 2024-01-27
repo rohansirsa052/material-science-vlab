@@ -1,5 +1,6 @@
 const charts = {};
 const schema = ["elongation", "time"];
+const ANIMATION_DELAY = 500;
 
 const readingData1 = [[0.01,0.38],[0.89,0.43],[3.37,0.45],[6.07,0.48],[9.19,0.5],[12.17,0.51],[15.15,0.52],[18.12,0.53],[21.1,0.54],[24.08,0.55],[27.05,0.56],[30.03,0.57],[33.01,0.58],[35.98,0.58],[38.96,0.59],[41.94,0.6],[44.91,0.61],[47.89,0.62],[50.87,0.62],[53.84,0.63],[56.82,0.64],[59.8,0.64],[62.77,0.65],[65.75,0.66],[68.73,0.66],[71.7,0.67],[74.68,0.67],[77.66,0.68],[80.63,0.69],[83.61,0.7],[86.59,0.7],[89.56,0.71],[92.54,0.72],[95.52,0.73],[98.49,0.74],[101.47,0.74],[104.45,0.76],[107.42,0.78],[110.33,0.8],[113.58,0.83],[116.15,0.86],[118.5,0.9],[119.4,0.9],[121.14,0.94],[121.48,0.96],[123.84,1.03],[123.84,1.03],[126.73,1.1],[126.23,1.04],[127.4,1.16],[128.95,1.33]];
 
@@ -7,16 +8,12 @@ const readingData2 = [[0.01,0.41],[2.71,0.45],[4.94,0.5],[7.13,0.54],[10.16,0.57
 
 const readingData3 = [[0.01,0.87],[0.02,0.78],[0.03,0.75],[1.12,0.92],[1.3,0.83],[1.61,1.01],[1.52,0.97],[3.57,1.06],[5.39,1.11],[7.21,1.15],[9.16,1.19],[10.7,1.24],[12.48,1.31],[12.17,1.27],[13.91,1.36],[15.08,1.45],[14.55,1.4],[15.81,1.53],[14.82,1.49],[16.14,1.59]];
 
-// x axis
-const time1 = readingData1.map((x) => x[0]);
-// y axis
-const elongation1 = readingData1.map((x) => x[1]);
+const graphData1 = readingData1.map((x) => ({x: x[0], y: x[1]}));
+const graphData2 = readingData2.map((x) => ({x: x[0], y: x[1]}));
+const graphData3 = readingData3.map((x) => ({x: x[0], y: x[1]}));
 
-const time2 = readingData2.map((x) => x[0]);
-const elongation2 = readingData2.map((x) => x[1]);
-
-const time3 = readingData3.map((x) => x[0]);
-const elongation3 = readingData3.map((x) => x[1]);
+const maxX = Math.ceil(Math.max(...graphData1.map((x) => x.x, ...graphData2.map((x) => x.x, ...graphData3.map((x) => x.x)))) + 1);
+const maxY = Math.ceil(Math.max(...graphData1.map((x) => x.y, ...graphData2.map((x) => x.y, ...graphData3.map((x) => x.y)))));
 
 var currPos = 0;
 
@@ -113,7 +110,7 @@ function handleStep3() {
   plotGraph(
     document.getElementById("outputGraphA").getContext("2d"),
     {
-      labels: time1,
+      // labels: time1,
       datasets: [
         {
           data: [],
@@ -151,12 +148,6 @@ function handleStep3() {
           currPos = 0;
           document.getElementById("startTest").innerHTML = "Start Test";
           document.getElementById("changeSample").disabled = false;
-          // document.getElementById("startTest").disabled = false;
-          // document.getElementById("startTest").innerHTML = "Done";
-          // document.getElementById("showGraphBtn").disabled = false;
-          // utm.stop();
-          // document.getElementById("btnNext").disabled = false;
-          // document.getElementById("arrowNext").classList.remove("disabled");
           return;
         }
 
@@ -173,13 +164,13 @@ function handleStep3() {
 
         currPos++;
 
-        let progress1 = (elongation1.length / tableData1.length) * currPos;
+        let progress1 = (graphData1.length / tableData1.length) * currPos;
 
         const chart1Data = {
-          labels: time1,
+          // labels: time1,
           datasets: [
             {
-              data: elongation1.slice(0, progress1),
+              data: graphData1.slice(0, progress1),
               borderColor: "#000",
               fill: false,
               label: "Test 1",
@@ -195,7 +186,7 @@ function handleStep3() {
         );
 
         // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-      }, 500);
+      }, ANIMATION_DELAY);
     }
 
     if (isFirstDone && isSecondDone == false) {
@@ -230,19 +221,19 @@ function handleStep3() {
 
         currPos++;
 
-        let progress1 = (elongation2.length / tableData2.length) * currPos;
+        let progress1 = (graphData2.length / tableData2.length) * currPos;
 
         const chart1Data = {
-          labels: time1,
+          // labels: time1,
           datasets: [
             {
-              data: elongation1,
+              data: graphData1,
               borderColor: "#000",
               fill: false,
               label: "Test 1",
             },
             {
-              data: elongation2.slice(0, progress1),
+              data: graphData2.slice(0, progress1),
               borderColor: "#ff5733", // Choose a different color
               fill: false,
               label: "Test 2",
@@ -257,7 +248,7 @@ function handleStep3() {
         );
 
         // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-      }, 500);
+      }, ANIMATION_DELAY);
     }
 
     if (isFirstDone && isSecondDone) {
@@ -297,25 +288,25 @@ function handleStep3() {
 
         currPos++;
 
-        let progress1 = (elongation3.length / tableData3.length) * currPos;
+        let progress1 = (graphData3.length / tableData3.length) * currPos;
 
         const chart1Data = {
-          labels: time1,
+          // labels: time1,
           datasets: [
             {
-              data: elongation1,
+              data: graphData1,
               borderColor: "#000",
               fill: false,
               label: "Test 1",
             },
             {
-              data: elongation2,
+              data: graphData2,
               borderColor: "#ff5733", // Choose a different color
               fill: false,
               label: "Test 2",
             },
             {
-              data: elongation3.slice(0, progress1),
+              data: graphData3.slice(0, progress1),
               borderColor: "#3e95cd", // Choose a different color
               fill: false,
               label: "Test 3",
@@ -330,7 +321,7 @@ function handleStep3() {
         );
 
         // document.querySelector(".menu").scrollTo(0, document.querySelector(".menu").scrollHeight);
-      }, 500);
+      }, ANIMATION_DELAY);
     }
   });
 
@@ -369,23 +360,6 @@ function handleStep4() {
   utm.destory();
   currentStepProgress = 5;
 }
-
-// function handleStep5() {
-//   let pane = document.getElementById("step5");
-
-//   pane.classList.add("done");
-//   pane.classList.remove("active");
-
-//   let next = document.getElementById("step6");
-//   next.classList.add("active");
-//   next.classList.remove("disabled");
-
-//   currentStepProgress = 6;
-
-//   if (vc) vc.init();
-//   if (utm) utm.destory();
-//   if (sample1) sample1.init();
-// }
 
 function handleStep5() {
   let pane = document.getElementById("step5");
@@ -500,6 +474,7 @@ function plotGraph(graphCtx, data, labelX, labelY) {
         scales: {
           xAxes: [
             {
+              type: 'linear',
               display: true,
               scaleLabel: {
                 display: true,
@@ -507,15 +482,9 @@ function plotGraph(graphCtx, data, labelX, labelY) {
               },
               ticks: {
                 beginAtZero: true,
-                steps: 20,
-                stepValue: 10,
-                // max: Math.max(...time1),
-                callback: function (label, index, labels) {
-                  const n = Number(label);
-                  return isNaN(n) ? label : Math.round(n);
-                },
+                max: maxX,
               },
-              // stacked: true,
+              stacked: true,
             },
           ],
           yAxes: [
@@ -527,9 +496,7 @@ function plotGraph(graphCtx, data, labelX, labelY) {
               },
               ticks: {
                 beginAtZero: true,
-                steps: 10,
-                stepValue: 5,
-                // max: Math.max(...elongation1),
+                max: maxY,
               },
             },
           ],
