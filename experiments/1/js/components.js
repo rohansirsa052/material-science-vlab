@@ -21,7 +21,7 @@ function VernierCaliper(canvas, ctx) {
   let arrow = new Image();
   let xOffset = 50;
   let yOffset = 90;
-  let scale = 0.8;
+  let scale = 1;
   let dragMode = 0; /* 0 = no drag, 1 = drag machine, */
   let isActive = false;
   let isFixed = 0; /* 0=draggable; 1=not draggable */
@@ -172,8 +172,8 @@ function VernierCaliper(canvas, ctx) {
       outString(x - 50, y + 4, "Drag sample here", 1, 0);
       ctx.drawImage(arrow, x, y, arrow.width / 2, arrow.height / 2);
     } else if (sampleLoaded == 1) {
-      let x = -15;
-      let y = 342;
+      let x = 14;
+      let y = 348;
 
       let currentSample = imgSampleH;
       if (utm && utm.getSampleState() == 2) {
@@ -182,9 +182,9 @@ function VernierCaliper(canvas, ctx) {
 
       ctx.drawImage(currentSample, x, y, currentSample.width / 2, currentSample.height / 2);
     } else if (sampleLoaded == 2) {
-      let x = 64;
+      let x = 66;
       // let y = 160;
-      let y = 300;
+      let y = 325;
 
       let currentSample = imgSampleV;
       if (utm && utm.getSampleState() == 2) {
@@ -563,8 +563,8 @@ function UTM(canvas, ctx) {
   let sampleNecked = new Image();
   let sampleCracked = new Image();
   let arrow = new Image();
-  let xOffset = 30;
-  let yOffset = 400;
+  let xOffset = 60;
+  let yOffset = 100;
   let yMovement = 0; /* 0 to 1 */
   let dragMode = 0; /* 0 = no drag, 1 = drag machine, */
   let isFixed = 0; /* 0=draggable; 1=not draggable */
@@ -581,7 +581,7 @@ function UTM(canvas, ctx) {
     finish_point: 1,
   };
 
-  let scale = 0.5;
+  let scale = 0.8;
   let flashArrow = true;
 
   // let startX = 0;
@@ -618,7 +618,7 @@ function UTM(canvas, ctx) {
   const init = () => {
     isActive = true;
     xOffset = 60;
-    yOffset = 400;
+    yOffset = 100;
 
     if (itemsLoaded >= itemsToLoad) {
       ctx.refresh();
@@ -921,8 +921,8 @@ function Sample1(canvas, ctx) {
   let sample1 = new Image();
   let sample1Cracked = new Image();
   let sample1Necked = new Image();
-  let xOffset = 40;
-  let yOffset = 120;
+  let xOffset = 30;
+  let yOffset = 100;
   let yMovement = 0; /* 0 to 1 */
   let dragMode = 0; /* 0 = no drag, 1 = drag machine, */
   let isFixed = 0; /* 0=draggable; 1=not draggable */
@@ -932,7 +932,7 @@ function Sample1(canvas, ctx) {
   let menuRotateText = ["Rotate", "Rotate back"];
   let menuRotateIcon = [ContextMenu.rotateRight, ContextMenu.rotateLeft];
 
-  let scale = 0.4;
+  let scale = 0.6;
 
   let isActive = false;
 
@@ -949,7 +949,7 @@ function Sample1(canvas, ctx) {
   const init = () => {
     isActive = true;
     xOffset = 40;
-    yOffset = 120;
+    yOffset = 100;
 
     if (itemsLoaded >= itemsToLoad) {
       ctx.refresh();
