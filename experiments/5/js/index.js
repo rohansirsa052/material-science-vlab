@@ -227,7 +227,7 @@ function handleStep4() {
         page: 4,
         title: "In a hypothetical curve given below for impact testing, A might correspond to: ",
         image: "images/QuestionsImages/fig3.png",
-        options: ["  Mild steel", "  Low carbon steel", "Chromium ", "Nickel"],
+        options: ["Mild steel", "  Low carbon steel", "Chromium ", "Nickel"],
         correct: 3,
       },
       {
@@ -235,7 +235,7 @@ function handleStep4() {
         title: "Which of the following is correct? ",
         options: [
           " In Izod test, the specimen is kept horizontally",
-          " The angle of the V-notch specimen is 60o",
+          " The angle of the V-notch specimen is 60 degree",
           " In Charpy test, the specimen is kept horizontally",
           "The initial height of the pendulum is the impact energy",
         ],
