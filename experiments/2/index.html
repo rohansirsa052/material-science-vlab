@@ -85,12 +85,15 @@
                   </ul>
                   <div class="mt-1">
                     <button id="startTest">Start Test</button>
+                    <button id="nextSample" disabled>Next Sample</button>
                     <button id="showGraphBtn" onclick="showGraph()" disabled>Plot</button>
                   </div>
 
                   <canvas id="outputGraphA"></canvas>
+                  <canvas id="outputGraphB"></canvas>
 
                   <div class="mt-1 dataTable">
+                    <h5>Metal Sample</h5>
                     <table>
                       <thead>
                         <tr>
@@ -103,44 +106,64 @@
                       <tbody id="testData"></tbody>
                     </table>
                   </div>
+                  <div class="dataTable" style="margin-top: 15px;">
+                    <h5>Polymer Sample</h5>
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Extension (mm)</td>
+                          <td>Load (N)</td>
+                          <td>Strain</td>
+                          <td>Stress</td>
+                        </tr>
+                      </thead>
+                      <tbody id="testData2"></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
+
 
               <div id="step5" class="box disabled">
-                <div class="label">Step 5: Activity.</div>
+                <div class="label">Step 5: Results</div>
+                <div class="content">
+                  <h5>Metal</h5>
+                  <table>
+                    <tr>
+                      <td>Yield Strength (MPa)</td>
+                      <td>21</td>
+                    </tr>
+                    <tr>
+                      <td>UTS (MPa)</td>
+                      <td>78.5</td>
+                    </tr>
+                    <tr>
+                      <td>Fracture elongation (%)</td>
+                      <td>65.9</td>
+                    </tr>
+                  </table>
+
+                  <h5>Polymer</h5>
+                  <table>
+                    <tr>
+                      <td>Flow Stress (in the region CD) (MPa)</td>
+                      <td>16</td>
+                    </tr>
+                    <tr>
+                      <td>Fracture elongation (%)</td>
+                      <td>655.5</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              
+              <div id="step6" class="box disabled">
+                <div class="label">Step 6: Activity.</div>
                 <div class="content">Click next button to continue.</div>
               </div>
-
-              <div id="step6" class="box disabled">
-                <div class="label">Step 6: Measure final length.</div>
-                <div class="content">
-                  <ul>
-                    <li>Right click on venier caliper and click on "Pin"</li>
-                    <li>Place the sample on the venier caliper and take the length.</li>
-                  </ul>
-
-                  <div class="mt-1">Change in length is negligible.</div>
-                </div>
-              </div>
-
-              <div id="step7" class="box disabled">
-                <div class="label">Step 7: Measure final diameter</div>
-                <div class="content">
-                  <ul>
-                    <li>Right click on venier caliper and click on unload sample.</li>
-                    <li>Now, Right click on sample and click on rotate.</li>
-                    <li>Place the sample on the venier caliper and take the diameter.</li>
-                  </ul>
-
-                  <div class="mt-1">Change in diameter is negligible.</div>
-                </div>
-              </div>
-
-              <div id="step8" class="box disabled">
-                <div class="label">Step 8: Results</div>
-                <div class="content"></div>
-              </div>
+            
             </div>
+
 
             <div class="actions">
               <!-- <image src="images/arrow.png" width="25px" class="blink" id="arrowNext" /> -->
