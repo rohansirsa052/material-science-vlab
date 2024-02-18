@@ -298,32 +298,71 @@ function handleStep5() {
     title: "Can you answer the questions?",
     body: [
       {
-        page: 1,
-        title: "What does point A indicates in the graph?",
-        image: "images/stress-strain-curve2.jpg",
-        options: ["Yield Strength", "Tensile Strength", "Plastic Strength", "Ultimate Tensile Strength"],
-        correct: 0,
+        "page": 1,
+        "title": "Which is true for uniaxial tensile engineering stress-strain curve of a polycrystalline aluminum?",
+        "options": ["Yield strength is more than ultimate tensile strength", "Fracture stress is less than ultimate tensile strength", "Slope of the stress-strain curve is the stiffness", "The maximum stress is called yield point"],
+        "correct": 1
       },
       {
-        page: 2,
-        title: "What does point U indicates in the graph?",
-        image: "images/stress-strain-curve2.jpg",
-        options: ["Tensile Strength", "Yield Strength", "Ultimate Tensile Strength", "Plastic Strength"],
-        correct: 2,
+        "page": 2,
+        "title": "Which one among the following exhibits highest modulus?",
+        "options": ["Aluminum (metal)", "Polyethylene (polymer)", "Alumina (ceramic)", "All above have same modulus"],
+        "correct": 2
       },
       {
-        page: 3,
-        title: "What does point F indicates in the graph?",
-        image: "images/stress-strain-curve2.jpg",
-        options: ["Tensile Strength", "Facture Point", "Ultimate Tensile Strength", "Plastic Strength"],
-        correct: 1,
+        "page": 3,
+        "title": "For which of the following stress-strain curve is linear till fracture?",
+        "options": ["Metal", "Ceramic", "Thermoplastic polymer", "All of the above"],
+        "correct": 1
       },
       {
-        page: 4,
-        title: "For which of the following stress-strain curve is linear till fracture?",
-        options: ["Metal", "Ceramic", "Thermoplastic polymer", "All of the above"],
-        correct: 1,
+        "page": 4,
+        "title": "Which material show a whole range of stress-strain responses, depending on conditions, from very creepy behavior to stiff elastic behavior, a rubbery range in between.",
+        "options": ["Polymer", "Metal", "Ceramic", "All of the above"],
+        "correct": 0
       },
+      {
+        "page": 5,
+        "title": "Which one of the following is true for the stress-strain curve of thermoplastic polymer?",
+        "options": ["There is no elastic regime", "Necking takes place after elastic regime", "The curve continuously goes up till fracture", "The curve goes up till UTS point and then goes down till fracture"],
+        "correct": 1
+      },
+      {
+        "page": 6,
+        "title": "Which is true for uniaxial tensile engineering stress-strain curve of a polycrystalline aluminum?",
+        "options": ["The curve goes up till yield point and then goes down till fracture", "Yield strength is higher than ultimate tensile strength", "The sample fractures before necking", "The maximum stress is called ultimate tensile strength"],
+        "correct": 3
+      },
+      {
+        "page": 7,
+        "title": "Which is true for uniaxial tensile engineering stress-strain curve of a polycrystalline metal?",
+        "options": ["The toughness of metal is typically higher than ceramics", "The toughness of metal is typically lower than ceramics", "After necking, the deformation is uniform throughout the gauge section", "Before necking, the deformation is non-uniform throughout the gauge section"],
+        "correct": 0
+      },
+      {
+        "page": 8,
+        "title": "Which of the following material will not show necking?",
+        "options": ["Metal", "Thermoplastic polymer", "Ceramic", "All of the above"],
+        "correct": 2
+      },
+      {
+        "page": 9,
+        "title": "“Cold drawing” is associated with which of the following material during stress-strain curve?",
+        "options": ["Metal", "Ceramic", "Polymer", "All of the above"],
+        "correct": 2
+      },
+      {
+        "page": 10,
+        "title": "Which one of the following will typically exhibit lowest strain to failure in stress-strain curve?",
+        "options": ["Polymer", "Metal", "Ceramic", "All of the above"],
+        "correct": 2
+      },
+      {
+        "page": 11,
+        "title": "Which one of the following is true for the stress-strain curve of ceramic material?",
+        "options": ["The stress-strain curve shows large plasticity", "The stress-strain curve shows that material exhibits low toughness", "The stress-strain curve is generally non-linear till fracture", "All of the above"],
+        "correct": 1
+      }
     ],
     onClose: handleStep6,
   });
