@@ -305,11 +305,71 @@ function handleStep5() {
     title: "Can you answer the questions?",
     body: [
       {
-        page: 1,
-        title: "Sample Question 1",
-        options: ["Option 1", "Option 2", "Option 3", "Option 4"],
-        correct: 1,
+        "page": 1,
+        "title": "What does the acronym UTM stand for?",
+        "options": ["Universal Tensile Machine", "Uniaxial Testing Machine", "Universal Testing Machine", "Uniaxial Tensile Machine"],
+        "correct": 2
       },
+      {
+        "page": 2,
+        "title": "UTM cannot be used for this test",
+        "options": ["Tensile Testing", "Compression Testing", "Impact Testing", "Bend/ Flexural Testing"],
+        "correct": 2
+      },
+      {
+        "page": 3,
+        "title": "Which of these describes Hooke’s Law?",
+        "options": ["Necking begins at maximum load", "Deformation is proportional to load", "Yield strength increases with increasing strain", "Stress at which plastic deformation begins"],
+        "correct": 1
+      },
+      {
+        "page": 4,
+        "title": "Strain is a measurement of",
+        "options": ["Extent of load applied on the sample", "Load bearing capacity of the sample", "Rigidity of the sample", "Extent of deformation in the sample"],
+        "correct": 3
+      },
+      {
+        "page": 5,
+        "title": "Which of the following is not a component of the UTM",
+        "options": ["Thermocouple", "Load Cell", "Load frame", "Crosshead"],
+        "correct": 0
+      },
+      {
+        "page": 6,
+        "title": "If the maximum load during tensile test is 100 N and the original cross sectional area of the sample is 1 mm2, then the maximum engineering stress is:",
+        "options": ["100 MPa", "10 MPa", "1 MPa", "0.1 MPa"],
+        "correct": 0
+      },
+      {
+        "page": 7,
+        "title": "If the engineering stress at a given point in stress-strain curve is 100 MPa and the engineering strain is 0.1, then the true stress at that point is:",
+        "options": ["101 MPa", "100 MPa", "100.1 MPa", "110 MPa"],
+        "correct": 3
+      },
+      {
+        "page": 8,
+        "title": "It is given that a sample of cross sectional area 100 mm2, is reduced to 45 mm2 at fracture, calculate the percentage reduction in area.",
+        "options": ["45", "55", "25", "75"],
+        "correct": 1
+      },
+      {
+        "page": 9,
+        "title": "Which of the following is TRUE for tensile testing of medium carbon steel?",
+        "options": ["It does not show UTS", "It does not show failure", "It shows abrupt transition from elastic to plastic region", "It shows brittle behavior"],
+        "correct": 2
+      },
+      {
+        "page": 10,
+        "title": "Which of the following points are not observed during tensile testing of medium carbon steel?",
+        "options": ["Upper yield point", "Lower yield point", "Failure", "cold drawing"],
+        "correct": 2
+      },
+      {
+        "page": 11,
+        "title": "Engineering strain is given as 0.2, then the true strain at that point is:",
+        "options": ["0.2", "0.18", "1.2", "Cannot be evaluated from the above data"],
+        "correct": 1
+      }
     ],
     onClose: () => {
       let pane = document.getElementById("step5");
