@@ -394,7 +394,7 @@ function handleStep5() {
       },
       {
         "page": 3,
-        "title": "It is given that aluminium can creep at and above 0.4 Tm, where Tm has its usual meaning. Calculate the minimum temperature (in oC) at which aluminium can creep? Melting point of aluminum is 660 oC",
+        "title": "It is given that aluminium can creep at and above 0.4 Tm, where Tm has its usual meaning. Calculate the minimum temperature (in ℃) at which aluminium can creep? Melting point of aluminum is 660 ℃",
         "options": ["Room temperature", "264", "100.2", "660"],
         "correct": 2
       },

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Experiment 7: Fatigue Test</title>
+    <title>Experiment 8</title>
     <link rel="stylesheet" href="css/main.css" />
     <script>
       var SAMPLE_ASSETS_PATH = "images/sample/";
@@ -21,21 +21,35 @@
         <div class="nav-content">
           <div id="instr" class="nav-pane active">
             <div id="accordion" class="accordion">
+              
               <div id="step1" class="box active">
-                <div class="label">Step 1: Select Sample</div>
+                <div class="label">Step 1: Select Machine</div>
                 <div class="content" style="display: flex; flex-wrap: wrap">
-                  <div class="p-1 pointer" onclick="loadSample('brass')" title="Click to select this sample.">
-                    <img src="images/sample/brass/sample.png" alt="" width="140" />
-                    <!-- <h6>Cast iron sample</h6> -->
+                  <div class="p-1 pointer" onclick="loadMachine('mit1')" title="Click to select this machine.">
+                    <img src="images/mit/mit1.png" alt="" width="60" height="116" />
+                    <h6>Vikers Machine</h6>
+                  </div>
+                  <div class="p-1 pointer" onclick="loadMachine('mit2')" title="Click to select this machine.">
+                    <img src="images/mit/mit2.png" alt="" width="60"/>
+                    <h6>Birnell Machine</h6>
                   </div>
                 </div>
               </div>
+
               <div id="step2" class="box disabled">
-                <div class="label">Step 2: Select Load</div>
+                <div class="label">Step 2: Select Sample</div>
                 <div class="content" style="display: flex; flex-wrap: wrap">
-                  <div class="p-1 pointer" onclick="loadWeightClicked()" title="Click to select this load.">
-                    <img src="images/sample/aluminium/1.png" alt="" width="60" />
-                    <!-- <h6>Weight</h6> -->
+                  <div class="p-1 pointer" onclick="loadSample('aluminium')" title="Click to select this sample.">
+                    <img src="images/sample/aluminium/logo.png" alt="" width="60" />
+                    <h6>Aluminium Sample</h6>
+                  </div>
+                  <div class="p-1 pointer" onclick="loadSample('brass')" title="Click to select this sample.">
+                    <img src="images/sample/brass/logo.png" alt="" width="60" />
+                    <h6>Brass Sample</h6>
+                  </div>
+                  <div class="p-1 pointer" onclick="loadSample('steel')" title="Click to select this sample.">
+                    <img src="images/sample/steel/logo.png" alt="" width="60" />
+                    <h6>Mild Steel Sample</h6>
                   </div>
                 </div>
               </div>
@@ -48,55 +62,32 @@
                   </ul>
                   <div class="mt-1">
                     <button id="startTest">Start Test</button>
-                    <button id="btnReset" disabled>Next Sample</button>
                   </div>
 
-                  <h6>Steel Sample</h6>
                   <canvas id="outputGraphA"></canvas>
-                  <h6>Aluminium Sample</h6>
-                  <canvas id="outputGraphB"></canvas>
 
-                  <h5>Steel Sample</h5>
-                  <div class="mt-1 mb-2 dataTable">
+                  <div class="mt-1 dataTable">
                     <table>
                       <thead>
                         <tr>
-                          <td>No. of cycles (in No.s)</td>
-                          <td>Amplitude Stress (MPa)</td>
+                          <td>Time (s)</td>
+                          <td>Penetration Depth (nm)</td>
+                          <td>Force (mN)</td>
                         </tr>
                       </thead>
                       <tbody id="testData"></tbody>
                     </table>
                   </div>
-
-                  <h5>Aluminium Sample</h5>
-                  <div class="mt-1 dataTable">
-                    <table>
-                      <thead>
-                        <tr>
-                          <td>No. of cycles (in No.s)</td>
-                          <td>Amplitude Stress (MPa)</td>
-                        </tr>
-                      </thead>
-                      <tbody id="testData2"></tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
+
               <div id="step4" class="box disabled">
                 <div class="label">Step 4: Results.</div>
                 <div class="content">
-                  <h5>S-N Curve for steel and Aluminium</h5>
+                  <p>Indention Point Scaled view</p>
                   <div>
-                    <img src="images/results/sn-curve.jpg" alt="" style="width: 100%" />
+                    <img src="images/results/output.bmp" alt="" style="width: 100%" />
                   </div>
-                  <ul>
-                    <li>Endurance Limit for Steel is ~320 MPa.</li>
-                    <li>
-                      Fatigue strength for Aluminum alloys is ~163 MPa @ 10<sup>7</sup> cycles since the materials doesn’t exhibit
-                      no endurance limit.
-                    </li>
-                  </ul>
                 </div>
               </div>
 
