@@ -7,7 +7,8 @@ var dragging = false;
 var draggedElement;
 var ctx;
 
-var mit = null;
+var mit1 = null;
+var mit2 = null;
 var vc = null;
 var sample = null;
 var samplePath = null;
@@ -20,13 +21,8 @@ function init(machineName) {
   ctx = canvas.getContext("2d");
   ctx.font = "30px Arial";
   ctx.lineWidth = 1.5;
- if(machineName=== "aluminium"){
-  mit = MIT(canvas, ctx);
- }
-  
-  else{
-    mit = MIT2(canvas, ctx);
-  }
+  mit1 = new MIT(canvas, ctx);
+  mit2 = new MIT2(canvas, ctx);
 
   sample = Sample(canvas, ctx);
 
@@ -67,7 +63,8 @@ function init(machineName) {
       }
     }
 
-    if (mit) mit.paint();
+    if (mit1) mit1.paint();
+    if (mit2) mit2.paint();
     if (sample) sample.paint();
 
     // footer text
@@ -76,11 +73,6 @@ function init(machineName) {
   };
 
   ctx.refresh();
-
-  setTimeout(() => {
-    mit.init();
-    sample.init();
-  }, 500);
   
   setInterval(() => {
     ctx.refresh();
@@ -96,17 +88,20 @@ function resize() {
 }
 
 function onMouseDownHandler(event) {
-  if (mit) mit.onMouseDownHandler(event);
+  if (mit1) mit1.onMouseDownHandler(event);
+  if (mit2) mit2.onMouseDownHandler(event);
   if (sample) sample.onMouseDownHandler(event);
 }
 
 function onMouseMoveHandler(event) {
-  if (mit) mit.onMouseMoveHandler(event);
+  if (mit1) mit1.onMouseMoveHandler(event);
+  if (mit2) mit2.onMouseMoveHandler(event);
   if (sample) sample.onMouseMoveHandler(event);
 }
 
 function onMouseUpHandler(event) {
-  if (mit) mit.onMouseUpHandler(event);
+  if (mit1) mit1.onMouseUpHandler(event);
+  if (mit2) mit2.onMouseUpHandler(event);
   if (sample) sample.onMouseUpHandler(event);
 }
 
@@ -114,7 +109,8 @@ function onContextMenuHandler(event) {
   event.preventDefault();
   event.stopPropagation();
 
-  if (mit) mit.onContextMenuHandler(event);
+  if (mit1) mit1.onContextMenuHandler(event);
+  if (mit2) mit2.onContextMenuHandler(event);
   if (sample) sample.onContextMenuHandler(event);
 }
 
@@ -122,7 +118,8 @@ function onClickHandler(event) {
   event.preventDefault();
   event.stopPropagation();
 
-  if (mit) mit.onClickHandler(event);
+  if (mit1) mit1.onClickHandler(event);
+  if (mit2) mit2.onClickHandler(event);
   if (sample) sample.onClickHandler(event);
 }
 
@@ -130,7 +127,8 @@ function onMouseWheelHandler(event) {
   event.preventDefault();
   event.stopPropagation();
 
-  if (mit) mit.onMouseWheelHandler(event);
+  if (mit1) mit1.onMouseWheelHandler(event);
+  if (mit2) mit2.onMouseWheelHandler(event);
   if (sample) sample.onMouseWheelHandler(event);
 }
 
@@ -138,7 +136,10 @@ function onElementDrop(event) {
   if (!draggedElement) return;
   switch (draggedElement.getAttribute("label")) {
     case "mitMachine":
-      mit.init();
+      mit1.init();
+      break;
+    case "mit2Machine":
+      mit2.init();
       break;
     case "sample":
       sample.init();
@@ -254,7 +255,22 @@ function loadSample(name) {
   }
 
   sample.init();
-  mit.unLoadSample();
+  if(mit1) mit1.unLoadSample();
+  if(mit2) mit2.unLoadSample();
+}
+
+function loadMachine(name) {
+  if (name == "mit1") {
+    if (mit1) mit1.init();
+    if(mit2) mit2.destroy();
+  }
+
+  if (name == "mit2") {
+    if(mit1) mit1.destroy();
+    if (mit2) mit2.init();
+  }
+
+  ctx.refresh();
 }
 
 window.refresh();

@@ -527,8 +527,11 @@ function Sample(canvas, ctx) {
 
   const onMouseUpHandler = (event) => {
     if (dragMode == 1) {
-      if (mit && mit.isActive() && mit.isInside(getMouseCoords(event))) {
-        mit.loadSample();
+      if (mit1 && mit1.isActive() && mit1.isInside(getMouseCoords(event))) {
+        mit1.loadSample();
+        destroy();
+      } else if(mit2 && mit2.isActive() && mit2.isInside(getMouseCoords(event))) {
+        mit2.loadSample();
         destroy();
       }
       ctx.refresh();
