@@ -40,6 +40,12 @@ function handle() {
 
 function handleStep1() {
   let pane = document.getElementById("step1");
+
+  if (!mit1.isActive() && !mit2.isActive()) {
+    alert("Please select a machine first!");
+    return;
+  }
+
   pane.classList.add("done");
   pane.classList.remove("active");
 
@@ -53,8 +59,8 @@ function handleStep1() {
 function handleStep2() {
   let pane = document.getElementById("step2");
 
-  if (!mit.isSampleLoaded()) {
-    alert("Please load the sample on the MIT machine first!");
+  if (!mit1.isSampleLoaded() && !mit2.isSampleLoaded()) {
+    alert("Please load the sample in the machine first!");
     return;
   }
 
@@ -86,23 +92,12 @@ function handleStep2() {
     document.getElementById("btnNext").disabled = true;
     e.currentTarget.innerHTML = "Running...";
 
-    mit.setConfig({
-      yield_point: 0.3,
-      breaking_point: 0.25,
-      finish_point: 0.2,
-    });
-
-    setTimeout(() => {
-      mit.start(0.02, -1);
-    }, 4000);
-
     let totalSteps = force.length;
     let intr = setInterval(() => {
       if (currPos >= totalSteps) {
         clearInterval(intr);
         document.getElementById("startTest").disabled = false;
         document.getElementById("startTest").innerHTML = "Done";
-        mit.stop();
         document.getElementById("btnNext").disabled = false;
         return;
       }
@@ -165,70 +160,91 @@ function handleStep3() {
   next.classList.remove("disabled");
 
   currentStepProgress = 4;
+}
+
+function handleStep4() {
+  let pane = document.getElementById("step4");
+
+  pane.classList.add("done");
+  pane.classList.remove("active");
+
+  let next = document.getElementById("step5");
+  next.classList.add("active");
+  next.classList.remove("disabled");
+
+  currentStepProgress = 5;
 
   modal = new Modal({
     title: "Can you answer the questions?",
     body: [
       {
         page: 1,
-        title: "The Vickers hardness in HV if the load applied is 100 grams and indentation size (diagonal length) is 43 microns (choose one of the closest one)?",
+        title:
+          "The Vickers hardness in HV if the load applied is 100 grams and indentation size (diagonal length) is 43 microns (choose one of the closest one)?",
         options: ["100", "400", "980", "1280"],
         correct: 0,
       },
       {
         page: 2,
         title: " Rockwell hardness is measured by measuring the:",
-        
-        options: [" Diameter of indentation", "Projected area of Indentation", "Depth of penetration of indenter", "Rebound height of indenter"],
+
+        options: [
+          " Diameter of indentation",
+          "Projected area of Indentation",
+          "Depth of penetration of indenter",
+          "Rebound height of indenter",
+        ],
         correct: 2,
       },
       {
         page: 3,
-        title: "  If the load applied is 3000 kgf, ball diameter is 10 mm, and indent impression diameter is 3 mm, the Brinell hardness (in BHN) is:",
-        
+        title:
+          "  If the load applied is 3000 kgf, ball diameter is 10 mm, and indent impression diameter is 3 mm, the Brinell hardness (in BHN) is:",
+
         options: ["1245", "415", "208", "520"],
         correct: 1,
       },
       {
         page: 4,
         title: "The Brinell hardness testing uses",
-        
+
         options: [" Tungsten Carbide sphere", "Steel cone", "Diamond cone", "Diamond pyramid"],
         correct: 0,
       },
       {
         page: 5,
         title: "Which of the following test provide measurements of surface property?",
-        
+
         options: ["Tensile test", "Fatigue test", "Impact test", "Hardness test"],
         correct: 3,
       },
       {
         page: 6,
-        title: "The Vickers hardness in MPa if the load applied is 100 grams and indentation size (diagonal length) is 43 microns (choose one of the closest one)?",
-        
+        title:
+          "The Vickers hardness in MPa if the load applied is 100 grams and indentation size (diagonal length) is 43 microns (choose one of the closest one)?",
+
         options: ["100", "980", "208", "520"],
         correct: 1,
       },
-    
+
       {
         page: 7,
         title: "The included angle in the Vickers hardness test is",
-        
+
         options: ["136", "90", "120", "60"],
         correct: 0,
       },
       {
         page: 8,
         title: " Rockwell indenter uses",
-        
+
         options: ["Diamond pyramid", "Diamond cone", "Steel cone", "Tungsten carbide ball"],
         correct: 0,
       },
       {
         page: 9,
         title: " Penetration Indicated by each unit in dial in Rockwell test",
-        
+
         options: ["0.2 mm", "0.02 mm", "0.002 mm", "0.0002 mm"],
         correct: 2,
       },
@@ -244,24 +260,10 @@ function handleStep3() {
         options: ["105", "210", "100", "110"],
         correct: 0,
       },
-     
     ],
-    onClose: handleStep4,
+    onClose: handleStep5,
   });
   modal.show();
-}
-
-function handleStep4() {
-  let pane = document.getElementById("step4");
-
-  pane.classList.add("done");
-  pane.classList.remove("active");
-
-  let next = document.getElementById("step5");
-  next.classList.add("active");
-  next.classList.remove("disabled");
-
-  currentStepProgress = 5;
 }
 
 function handleStep5() {
