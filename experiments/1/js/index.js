@@ -360,8 +360,8 @@ function handleStep5() {
       },
       {
         "page": 10,
-        "title": "Which of the following points are not observed during tensile testing of medium carbon steel?",
-        "options": ["Upper yield point", "Lower yield point", "Failure", "cold drawing"],
+        "title": "What does the acronym UTM stand for?",
+        "options": ["Universal Tensile Machine", "Uniaxial Testing Machine", "Universal Testing Machine", "Uniaxial Tensile Machine"],
         "correct": 2
       },
       {

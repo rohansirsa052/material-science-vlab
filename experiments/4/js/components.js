@@ -77,8 +77,8 @@ function MIT(canvas, ctx) {
       // } else if (CURRENT_SAMPLE == "steel") {
       //   currentSample = sample3Img;
       // }
-      let _x = (xOffset + 30) * scale;
-      let _y = (yOffset + 220) * scale;
+      let _x = (xOffset + 193) * scale;
+      let _y = (yOffset + 284) * scale;
       ctx.drawImage(currentSample, _x, _y, (currentSample.width * scale) / 3, (currentSample.height * scale) / 3);
     }
 
@@ -405,7 +405,11 @@ function Sample(canvas, ctx) {
   let scale = 0.6;
 
   let isActive = false;
-
+  console.log(utm.isActive());
+  if(utm.isActive()){
+  sample1Img.src = "images/sample/sample_utm.png";
+  }
+  else
   sample1Img.src = "images/sample/sample.png";
   sample1Img.onload = itemsLoaded++;
   // sample2Img.src = "images/sample/brass/1.png";
@@ -713,7 +717,7 @@ function UTM(canvas, ctx) {
   imgUTMPiller2.src = assetPath + "utm3.png";
   imgUTMPiller2.onload = itemsLoaded++;
 
-  sample.src = assetPath2 + "sample2.png";
+  sample.src = assetPath2 + "sample_utm.png";
   sample.onload = itemsLoaded++;
 
   // sampleNecked.src = assetPath + "sample1-necked.png";
